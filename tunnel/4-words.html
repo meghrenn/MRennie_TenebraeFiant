@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-CAN">
+
+<head>
+    <title></title>
+    <link rel="icon" type="image/png" href="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script src="../js/continue.js"></script>
+</head>
+<style>
+    #letter-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .letter-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 50px);
+        grid-template-rows: repeat(4, 50px);
+        gap: 10px;
+    }
+
+    .letter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        /* height: 4rem; */
+        background: var(--red-dark);
+        border: 1px solid #ccc;
+        font-family: 'AbscissaBold', 'Arial', sans-serif;
+        font-weight: bold;
+        font-size: 24px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        margin-bottom: 10px;
+        z-index: 1;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.5);
+        transition: 0.5s ease-in-out;
+    }
+
+
+    /* 
+    .draggable {
+
+        font-size: 24px;
+        user-select: none;
+        cursor: move;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       
+    } */
+
+    .letter.selected {
+        background-color: var(--green-light);
+        color: var(--lightest);
+    }
+</style>
+
+<body data-group-id="tunnel" data-page-id="4-words">
+    <header id="main-header">
+        <ul>
+            <li id="about" class="basic-padding">About</li>
+            <li id="help" class="basic-padding">Trouble</li>
+            <li id="progress" class="basic-padding">Progress</li>
+        </ul>
+    </header>
+    <main class="thick-padding containment">
+        <h1>4 Words</h1>
+        <div id="letter-cintainer">
+            <div class="letter-grid">
+                <div class="letter" data-row="1">L</div>
+                <div class="letter" data-row="1">I</div>
+                <div class="letter" data-row="1">N</div>
+                <div class="letter" data-row="1">E</div>
+
+                <div class="letter" data-row="2">V</div>
+                <div class="letter" data-row="2">E</div>
+                <div class="letter" data-row="2">I</div>
+                <div class="letter" data-row="2">L</div>
+
+                <div class="letter" data-row="3">R</div>
+                <div class="letter" data-row="3">I</div>
+                <div class="letter" data-row="3">S</div>
+                <div class="letter" data-row="3">K</div>
+
+                <div class="letter" data-row="4">I</div>
+                <div class="letter" data-row="4">D</div>
+                <div class="letter" data-row="4">L</div>
+                <div class="letter" data-row="4">E</div>
+            </div>
+        </div>
+    </main>
+    <div id="header-container"></div>
+</body>
+<script>
+    // Track selected letters and their respective rows
+    const selectedLetters = {};
+
+    // Function to check if the correct sequence of letters is selected
+    function checkSelectedSequence() {
+        // Check for the sequence "LIKE"
+        if (
+            selectedLetters['1'] === 'L' &&
+            selectedLetters['2'] === 'I' &&
+            selectedLetters['3'] === 'K' &&
+            selectedLetters['4'] === 'E'
+        ) {
+            // Play audio and redirect
+            playAudioAndRedirect("../monster/like-light.html");
+        }
+        // Check for the sequence "EVIL"
+        else if (
+            selectedLetters['1'] === 'E' &&
+            selectedLetters['2'] === 'V' &&
+            selectedLetters['3'] === 'I' &&
+            selectedLetters['4'] === 'L'
+        ) {
+            // Play audio and redirect
+            playAudioAndRedirect("../monster/evil-light.html");
+        }
+    }
+
+    // Function to play audio and redirect
+    function playAudioAndRedirect(url) {
+        // Play audio
+        var audio = new Audio('../audio/click2.mp3');
+        audio.volume = 0.7;
+        audio.play();
+
+        // Iterate over all letter elements and change background color temporarily
+        document.querySelectorAll(".letter").forEach(element => {
+            element.style.backgroundColor = 'var(--green-light)';
+            element.style.color = 'var(--dark)';
+        });
+
+        // Set timeout to revert the color change and redirect
+        setTimeout(function () {
+            document.querySelectorAll(".letter").forEach(element => {
+                element.style.backgroundColor = '';
+                element.style.color = '';
+            });
+            window.location.href = url;
+        }, 1000);
+    }
+
+    // Event listener for letter tiles
+    document.querySelectorAll('.letter').forEach(letter => {
+        letter.addEventListener('click', () => {
+            const row = letter.getAttribute('data-row');
+
+            // Deselect any previously selected letter in the same row
+            document.querySelectorAll(`.letter[data-row="${row}"]`).forEach(l => {
+                l.classList.remove('selected');
+            });
+
+            // Select the clicked letter
+            letter.classList.add('selected');
+            selectedLetters[row] = letter.textContent;
+
+            // Check if the correct sequence is selected
+            checkSelectedSequence();
+        });
+    });
+
+
+
+</script>
+
+</html>
