@@ -3,12 +3,11 @@
 
 <head>
     <title>WEST IS BEST</title>
-    <link rel="icon" type="image/png" href="">
+    <link rel="icon" type="image/png" href="../images/logo/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/history-hold.css">
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="../js/scripts.js"></script>
 </head>
 
@@ -158,28 +157,16 @@
  -->
     </div>
     <div id="header-container"></div>
-    <!-- <script>
-
-        document.addEventListener('DOMContentLoaded', function () {
-            window.addEventListener('scroll', function () {
-                const scrollTop = window.scrollY;
-                const windowHeight = window.innerHeight;
-                const pageHeight = document.body.scrollHeight;
-                const opacity = 0 + (scrollTop / (pageHeight - windowHeight));
-
-                // Create or select the darkening element
-                let darkeningElement = document.querySelector('.darken');
-                if (!darkeningElement) {
-                    darkeningElement = document.createElement('div');
-                    darkeningElement.classList.add('darken');
-                    document.body.appendChild(darkeningElement);
-                }
-
-                // Set opacity and adjust background color
-                darkeningElement.style.opacity = opacity;
-            });
+    <script>
+        var audio = new Audio('../audio/page-move2.wav');
+        audio.volume = 0.7;
+        audio.playbackRate = 2;
+        histHold.addEventListener('mouseover', function (event) {
+            if (event.target.closest('#hist-hold')) {
+                audio.play();
+            }
         });
-    </script> -->
+    </script>
 </body>
 
 </html>
