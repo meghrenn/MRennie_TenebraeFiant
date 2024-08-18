@@ -104,36 +104,28 @@
     <div id="header-container"></div>
 </body>
 <script>
-    // Track selected letters and their respective rows
     const selectedLetters = {};
 
-    // Function to check if the correct sequence of letters is selected
     function checkSelectedSequence() {
-        // Check for the sequence "LIKE"
         if (
             selectedLetters['1'] === 'L' &&
             selectedLetters['2'] === 'I' &&
             selectedLetters['3'] === 'K' &&
             selectedLetters['4'] === 'E'
         ) {
-            // Play audio and redirect
             playAudioAndRedirect("../monster/like-light.html");
         }
-        // Check for the sequence "EVIL"
         else if (
             selectedLetters['1'] === 'E' &&
             selectedLetters['2'] === 'V' &&
             selectedLetters['3'] === 'I' &&
             selectedLetters['4'] === 'L'
         ) {
-            // Play audio and redirect
             playAudioAndRedirect("../monster/evil-light.html");
         }
     }
 
-    // Function to play audio and redirect
     function playAudioAndRedirect(url) {
-        // Play audio
         var audio = new Audio('../audio/click2.mp3');
         audio.volume = 0.7;
         audio.play();
@@ -144,7 +136,6 @@
             element.style.color = 'var(--dark)';
         });
 
-        // Set timeout to revert the color change and redirect
         setTimeout(function () {
             document.querySelectorAll(".letter").forEach(element => {
                 element.style.backgroundColor = '';
@@ -154,7 +145,6 @@
         }, 1000);
     }
 
-    // Event listener for letter tiles
     document.querySelectorAll('.letter').forEach(letter => {
         letter.addEventListener('click', () => {
             const row = letter.getAttribute('data-row');
@@ -172,9 +162,5 @@
             checkSelectedSequence();
         });
     });
-
-
-
 </script>
-
 </html>

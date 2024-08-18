@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/evil.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="../js/scripts.js"></script>
 </head>
@@ -111,7 +110,7 @@
         const hold2 = document.getElementById('hold-words2');
         const svgElement = document.querySelector('svg');
 
-        const adjustPositions = () => { // Adjust positions based on pic dimensions
+        const adjustPositions = () => { 
             const picHeight = pic.offsetHeight;
             const picWidth = pic.offsetWidth;
 
@@ -124,31 +123,10 @@
             hold1.style.left = `${picHeight * 0.05}px`;
             hold2.style.top = `${picHeight * -0.15}px`;
             hold2.style.left = `${picHeight * 0.8}px`;
-
-
-            //     svgElement.style.width = `${picWidth}px`;
-            //     svgElement.style.height = `${picHeight}px`;
-            //     svgElement.setAttribute('viewBox', `${picHeight * -0.95} ${picHeight * -0.05} ${picWidth} ${picHeight}`);
-
-            //     const path = document.getElementById('path'); // Selecting the path element
-            //     path.setAttribute('width', `${picHeight * 0.2}px`); // Setting width attribute
-            //     path.setAttribute('height', `${picHeight * 0.2}px`); // Setting height attribute
-            //     //works for smaller type:
-            //     path.setAttribute('d', `M ${picWidth * 0.12},${picHeight * 0.5}
-            // A ${picWidth * 0.08},${picHeight * 0.09} 0 0 1 ${picWidth * 0.257},${picHeight * 0.6}
-            // A ${picWidth * 0.08},${picHeight * 0.08} 0 0 1 ${picWidth * 0.2},${picHeight * 0.5}`);
-            //     path.setAttribute('transform', `translate(${picHeight * -0.48}, ${picHeight * -0.085})`);
-            //     path.setAttribute('fill', 'none'); // Setting fill attribute to none
-            //     path.setAttribute('stroke', 'none'); // Setting stroke attribute to white
         };
 
-        // Call adjustPositions initially and on window resize
         adjustPositions();
         window.addEventListener('resize', adjustPositions);
     });
-
-
-
 </script>
-
 </html>

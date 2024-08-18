@@ -270,7 +270,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('image-solution').addEventListener("click", function () { //redirect to next page
+        document.getElementById('image-solution').addEventListener("click", function () {
             if (success) {
                 window.location.href = "architect.html";
             }
@@ -281,44 +281,9 @@
                 initMicrophone();
             }
         });
-        //     //check if all clouds have gone
-        //     function checkCloudPositions() {
-        //         // Get the viewport dimensions
-        //         const viewportHeight = window.innerHeight;
-
-        //         // Select all elements with class "cloud"
-        //         const clouds = document.querySelectorAll('.cloud');
-
-
-        //         // Loop through each cloud element
-        //         clouds.forEach(function (cloud) {
-        //             // Get the bounding rectangle of the cloud element
-        //             const rect = cloud.getBoundingClientRect();
-
-        //             // Check if the bottom of the cloud element is above the top of the viewport
-        //             if (rect.bottom < 0 || rect.top > viewportHeight) {
-        //                 success = true;
-        //                 console.log("hooray!");
-        //                 const aboveTheClouds = document.querySelector('.above-the-clouds');
-
-        //                 // Remove all existing content
-        //                 aboveTheClouds.innerHTML = '';
-
-        //                 // Create a new paragraph element
-        //                 const newParagraph = document.createElement('p');
-        //                 newParagraph.textContent = 'Hooray';
-
-        //                 // Append the new paragraph to the element
-        //                 aboveTheClouds.appendChild(newParagraph);
-        //                 const explain = document.getElementById('explain');
-        //                 // Fade in the explanation by setting opacity to 1
-        //                 explain.style.opacity = '1';
-        //             }
-        //         });
-        //     }
     });
 
-    document.getElementById("wind").addEventListener("click", function () { // Check cloud positions only if #wind has been clicked
+    document.getElementById("wind").addEventListener("click", function () {
         if (!success) {
             intervalId = setInterval(function () {
                 console.log("check");
@@ -353,7 +318,6 @@
             console.log("success");
             clearInterval(intervalId);
 
-            // stopMicrophone();
             var clouds = document.querySelectorAll(".cloud");
             clouds.forEach(function (cloud) {
                 cloud.style.opacity = "0";

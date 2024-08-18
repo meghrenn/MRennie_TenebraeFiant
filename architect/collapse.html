@@ -38,11 +38,6 @@
     <main class="containment basic-padding">
         <div class="thick-padding">
             <h1>Collapse</h1>
-
-            <!-- <p> Are they still visions if there's nothing visible? Or are they just auditory hallucinations?</p>
-            <p>I hear voices. <a href="https://www.ulethbridge.ca/50-voices/content/bob" target="_blank">I know where
-                    they're from</a>, but that doesn't help us any. It doesn't remove them from my head. They're nestled
-                in like parasites, like propaganda.</p> -->
             <!-- audio player adapted from https://codepen.io/MM-Z-the-animator/pen/yLQjyam -->
             <div class="center-container">
                 <div class="aWrap marginal-margin">
@@ -107,7 +102,7 @@
 <script>
 
     document.getElementById("collapse-form").addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent the form from submitting and reloading the page
+        event.preventDefault(); 
         var enteredPassword = document.getElementById("file-pass").value;
         console.log(enteredPassword);
         if (enteredPassword === "will") {
@@ -117,8 +112,7 @@
             setTimeout(function () {
                 document.body.style.backgroundColor = '';
                 document.getElementById("main-header").style.backgroundColor = '';
-                // window.location.href = "../architect/level.html";
-                window.location.href = "../architect/level.html";
+                             window.location.href = "../architect/level.html";
             }, 700);
         } else if (enteredPassword === "will-not") {
             puzzleSolved = true;
@@ -279,7 +273,5 @@
             setProgress(this);
         });
     }
-
 </script>
-
 </html>

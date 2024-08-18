@@ -58,10 +58,8 @@
         }
 
         .flickering-element {
-            /* width: 55vw; */
-            position: absolute;
+                    position: absolute;
             opacity: 0;
-
             transition: opacity 0.5s;
             text-shadow: 0 0 25px rgba(255, 255, 255, 0.8),
 
@@ -81,13 +79,6 @@
                     0 0 0px rgba(255, 255, 255, 0.4),
                     0 0 0px rgba(255, 255, 255, 0.2);
             }
-
-            /* 50% {
-                text-shadow: 0 0 10px rgba(255, 255, 255, 1),
-                    0 0 20px rgba(255, 255, 255, 0.8),
-                    0 0 30px rgba(255, 255, 255, 0.6),
-                    0 0 40px rgba(255, 255, 255, 0.4);
-            } */
 
             50% {
                 text-shadow: 0 0 2px rgba(255, 255, 255, 0.8),
@@ -120,17 +111,10 @@
     <div class="flickering-element" style="top: 75%; right: 5%;">blue light bending</div>
     <div class="flickering-element" style="top: 80%; left: 30%;">circadian cycle becomes</div>
     <div class="flickering-element" style="top: 84%; right: 10%;">a mobius strip</div>
-
-
     <div class="center-container basic-padding marginal-margin" style="position: absolute; top: 88%;">
         <div id="continue" class="button basic-padding">Continue</div>
     </div>
-
     <!-- <p>Your life runs as efficient and brilliant as a closed circuit.</p> -->
-
-
-
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const flickeringElements = document.querySelectorAll('.flickering-element');

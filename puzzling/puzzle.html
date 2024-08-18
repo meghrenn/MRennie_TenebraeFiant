@@ -53,7 +53,7 @@
     audio.volume = 0.7;
     // Puzzle adapted from Tile sliding puzzle by James Meyers on codepen: https://codepen.io/FullR/pen/zKVKwE
     function success() {
-        puzzleSolved = true; // Set puzzleSolved to TRUE when the correct password is entered
+        puzzleSolved = true;
         document.body.style.backgroundColor = 'var(--green-dark)';
         document.getElementById("main-header").style.backgroundColor = 'var(--green-medium)';
         setTimeout(function () {
@@ -110,8 +110,7 @@
             if (this.isPuzzleSolved()) {
                 console.log("Puzzle Solved!");
                 success();
-                // Add any additional actions you want to perform when the puzzle is solved
-            }
+                       }
         }
 
         swapTiles(a, b) {
@@ -224,5 +223,4 @@
         height = window.innerWidth * 0.5 + "px";
     });
 </script>
-
 </html>

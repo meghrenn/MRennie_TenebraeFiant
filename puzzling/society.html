@@ -177,14 +177,12 @@
         });
     });
 
-    // Get the container element
     const list = document.getElementById('list');
 
 
 
     new Sortable(list, {
         onStart: function (evt) {
-            // Add border color to the element being dragged
             evt.item.style.border = "6px solid var(--red-medium)";
         },
         onEnd: function (evt) {
@@ -194,20 +192,16 @@
 
             evt.item.style.border = "";
 
-            // Reset border color for all elements
-            draggableElements.forEach(element => {
+                     draggableElements.forEach(element => {
                 element.style.borderColor = '';
             });
             if (text === "COYSITE") {
                 var audio = new Audio('../audio/click2.mp3');
                 audio.volume = 0.7;
                 audio.play();
-                // Iterate over each draggable element
                 draggableElements.forEach(element => {
-                    // Change background color temporarily
                     element.style.backgroundColor = 'var(--green-light)';
                     element.style.color = 'var(--dark)';
-                    // Set timeout to revert the color change
                     setTimeout(function () {
                         element.style.backgroundColor = '';
                         element.style.color = '';
@@ -229,5 +223,4 @@
         }
     });
 </script>
-
 </html>

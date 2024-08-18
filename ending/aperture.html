@@ -7,8 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="../js/scripts.js"></script>
+      <script src="../js/scripts.js"></script>
 </head>
 <style>
     body {
@@ -66,7 +65,6 @@
 </style>
 
 <body data-group-id="ending" data-page-id="aperture">
-
     <img id="aperture-back" src="../images/aperture.png"
         alt="A black-and-white image of the aperture sculpture on campus.">
     <img id="monster" src="../images/logo/logo-convex2.png">
@@ -112,13 +110,12 @@
     });
 
     $(document).ready(function () {
-        // Variables
-        let paragraphs = $(".eldritch-speak, #fade-trigger, #continue");
+             let paragraphs = $(".eldritch-speak, #fade-trigger, #continue");
         let currentIndex = 0;
 
         // Initial fade-in of monster and first paragraph
         $("#monster").fadeIn(1000, function () {
-            $(paragraphs[currentIndex]).fadeIn(1000);
+            $(paragraphs[currentIndex]).fadeIn(5000);
         });
 
         // Handle click on the right side

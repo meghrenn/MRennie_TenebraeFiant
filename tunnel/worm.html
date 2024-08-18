@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/evil.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="../js/scripts.js"></script>
 </head>
@@ -24,18 +23,14 @@
     .image-container {
         width: 100vw;
         height: 100vh;
-        /* Set width to 100% of the viewport width */
         overflow-x: auto;
         white-space: nowrap;
-        /* Prevent line breaks */
         position: relative;
     }
 
     .image-container img {
         display: block;
-        /* Make the image a block element */
         width: auto;
-        /* Prevent the image from being constrained by its container */
         height: 100vh;
     }
 
@@ -77,21 +72,7 @@
         cursor: pointer;
         z-index: 999;
     }
-
-    /* @media (orientation: landscape) {
-        .image-container {
-            width: 100vw;
-            height: 100vh;
-        }
-
-        .image-container img {
-            width: 100vw;
-            height: auto;
-        }
-
-    } */
 </style>
-<!-- M73.2,148.6c4-6,65.5-96.8,148.6-95.6c71.3,1.2,120.8,90.3,115.1,97 -->
 
 <body class="medium" data-group-id="tunnel" data-page-id="worm">
     <main class="right-container">
@@ -107,8 +88,6 @@
                 <path id="path" d="M 10% 25% 
                              A 25% 25% 0 0 1 90% 25%
                              A 25% 25% 0 0 1 10% 25%" />
-
-                <!-- <path id="curve" fill="transparent" d="M73.2,148c1-6,45.5-96.8,148.6-95.6c71.3,1.2,120.8,90.3,100,80" /> -->
                 <text>
                     <textPath alignment-baseline="top" xlink:href="#path">
                         where will this wormhole lead?
@@ -146,9 +125,9 @@
             svgElement.style.height = `${picHeight}px`;
             svgElement.setAttribute('viewBox', `${picHeight * -0.95} ${picHeight * -0.05} ${picWidth} ${picHeight}`);
 
-            const path = document.getElementById('path'); // Selecting the path element
-            path.setAttribute('width', `${picHeight * 0.2}px`); // Setting width attribute
-            path.setAttribute('height', `${picHeight * 0.2}px`); // Setting height attribute
+            const path = document.getElementById('path');
+            path.setAttribute('width', `${picHeight * 0.2}px`);
+            path.setAttribute('height', `${picHeight * 0.2}px`);
 
 
             //works for smaller type:
@@ -169,8 +148,8 @@
 
 
 
-            path.setAttribute('fill', 'none'); // Setting fill attribute to none
-            path.setAttribute('stroke', 'none'); // Setting stroke attribute to white
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke', 'none');
             // svgElement.style.top = `${ picHeight * - 1.07}px`;
             // svgElement.style.left = `${ picHeight * 0.495 } px`;
             // svgElement.style.height = `${ picheight * 0.856 } px`;
@@ -182,7 +161,6 @@
 
         };
 
-        // Call adjustPositions initially and on window resize
         adjustPositions();
         window.addEventListener('resize', adjustPositions);
     });

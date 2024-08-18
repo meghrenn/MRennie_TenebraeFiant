@@ -47,26 +47,17 @@
         <img id="above" class="locked" src="../images/overhead/1956.jpg">
         <img id="fog" class="avail" src="../images/origins/bldg-plan1.png">
         <img id="controversy" class="locked" src="../images/origins/protest1.png">
-        <!-- <img id="ameliorate" class="avail" src="../images/meliorist/first-edition.jpg"> -->
+        <img id="ameliorate" class="avail" src="../images/meliorist/first-edition.jpg">
         <img id="puzzle" class="locked" src="../images/bug/vw-bug1.png">
         <img id="west" class="avail" src="../images/origins/bldg1.png">
         <img id="logo" class="locked" src="../images/coat-of-arms.jpg">
         <img id="construction" class="avail" src="../images/origins/1971.png">
-        <!-- <img id="unearthed" class="locked" src="../images/meliorist/unearthed-photograph.jpg"> -->
+        <img id="unearthed" class="locked" src="../images/meliorist/unearthed-photograph.jpg">
         <img id="tale" class="locked" src="../images/students1.png">
 
         <!-- WE WOULD IF WE COULD -->
 
         <img id="worm" class="avail" src="../images/origins/worm3.png">
-
-
-        <!-- <img style=" 
-            src="../images/origins/Focus16_1.jpg" "../images/origins/Focus16_2.jpg"> -->
-        <!-- <img style="top: 2000px; left: 550px; transform: translateX(170px) translateY(150px) rotate(95deg)"
-            src="../images/origins/Focus16_3.jpg">
-        <img  src="../images/origins/kyu.jpg"> -->
-        <!-- <img id="finished-coulee" class="locked" style="top: 2000px; left: -10px;;" src="../images/origins/bldg3.png"> -->
-
     </div>
     <div id="header-container"></div>
 
@@ -89,7 +80,7 @@
                 if (event.target.classList.contains('locked')) {
                     event.preventDefault(); // Prevent the default action (navigation)
                 } else {
-                    window.location.href = url; // Navigate to the new page
+                    window.location.href = url;
                 }
             }
 
@@ -105,9 +96,9 @@
             // document.getElementById("strike2").addEventListener("click", function (event) {
             //     handleClick(event, "../strike/2022.html");
             // });
-            // document.getElementById("ameliorate").addEventListener("click", function (event) {
-            //     handleClick(event, "../meliorist/ameliorate.html");
-            // });
+            document.getElementById("ameliorate").addEventListener("click", function (event) {
+                handleClick(event, "../meliorist/ameliorate.html");
+            });
             document.getElementById("logo").addEventListener("click", function (event) {
                 handleClick(event, "../monster/logo.html");
             });
@@ -123,20 +114,17 @@
             document.getElementById("puzzle").addEventListener("click", function (event) {
                 handleClick(event, "../puzzling/puzzle.html");
             });
-            // document.getElementById("unearthed").addEventListener("click", function (event) {
-            //     handleClick(event, "../meliorist/unearthed.html");
-            // });
+            document.getElementById("unearthed").addEventListener("click", function (event) {
+                handleClick(event, "../meliorist/unearthed.html");
+            });
             document.getElementById("construction").addEventListener("click", function (event) {
                 handleClick(event, "../puzzling/construction.html");
             });
         };
 
         document.addEventListener('DOMContentLoaded', function () {
-            // Retrieve gameProgress from local storage
-            const gameProgress = JSON.parse(localStorage.getItem('gameProgress')) || [];
-
-            // Get all child elements of #hist-hold
-            let histHoldChildren = document.querySelectorAll('#hist-hold > *');
+            const gameProgress = JSON.parse(localStorage.getItem('gameProgress')) || []; // Retrieve gameProgress from local storage
+            let histHoldChildren = document.querySelectorAll('#hist-hold > *'); // Get all child elements of #hist-hold
 
             // Iterate through each child element
             histHoldChildren.forEach(function (child) {
@@ -147,7 +135,6 @@
                     return item.pageId === childId || item.groupId === childId;
                 });
 
-                // If a match is found, add the 'seen' class to the element
                 if (matchFound) {
                     child.classList.add('seen');
                     child.classList.remove('locked');
@@ -161,53 +148,42 @@
                 gameProgress.some(item => item.groupId === groupId)
             );
 
-            // If all required groupIds are found, create and display the pink overlay and button
             if (allRequiredIdsPresent) {
-                // Create the pink overlay element
                 const overlay = document.createElement('div');
                 overlay.style.position = 'fixed';
                 overlay.style.top = 0;
                 overlay.style.left = 0;
                 overlay.style.width = '100%';
                 overlay.style.height = '100%';
-                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0)'; // Initial transparent pink
+                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0)';
                 overlay.style.zIndex = 1000;
-                overlay.style.transition = 'background-color 1s ease-in-out'; // Fade-in transition
+                overlay.style.transition = 'background-color 1s ease-in-out';
                 document.body.appendChild(overlay);
 
-                // Create the outer container for the button
                 const outerContainer = document.createElement('div');
                 outerContainer.classList.add('center-container', 'basic-padding', 'marginal-margin');
 
-                // Create the button element
                 const continueButton = document.createElement('div');
                 continueButton.id = 'continue';
                 continueButton.classList.add('button', 'basic-padding');
                 continueButton.textContent = 'You have seen enough';
 
-                // Append the button to the outer container
                 outerContainer.appendChild(continueButton);
-
-                // Append the outer container to the overlay
                 overlay.appendChild(outerContainer);
 
-                // Center the outer container within the overlay
                 outerContainer.style.position = 'absolute';
                 outerContainer.style.top = '50%';
                 outerContainer.style.left = '50%';
                 outerContainer.style.transform = 'translate(-50%, -50%)';
 
-                // Trigger the fade-in of the overlay
                 setTimeout(() => {
-                    overlay.style.backgroundColor = 'rgba(0, 0, 0, 1)'; // Full bright pink
+                    overlay.style.backgroundColor = 'rgba(0, 0, 0, 1)';
                 }, 10); // Small delay to ensure the transition works
                 continueButton.addEventListener('click', function () {
                     window.location.href = '../ending/encroaching-end.html';
                 });
             }
         });
-
-
 
         const choseTail = localStorage.getItem('choseTail') === 'true';
 
@@ -220,19 +196,12 @@
         }
 
 
-        // // Get the container element by id
-        // const container = document.getElementById('hist-hold');
-
-
-
         window.addEventListener('scroll', function () {
             const scrollTop = window.scrollY;
             const windowHeight = window.innerHeight;
             const pageHeight = histHold.offsetHeight;
-            // document.body.scrollHeight;
             const opacity = 0 + (scrollTop / (pageHeight - windowHeight));
 
-            // Create or select the darkening element
             let darkeningElement = document.querySelector('.darken');
             if (!darkeningElement) {
                 darkeningElement = document.createElement('div');
@@ -240,13 +209,8 @@
                 document.body.appendChild(darkeningElement);
             }
 
-            // Set opacity and adjust background color
             darkeningElement.style.opacity = opacity;
         });
-
-
-
-
     </script>
 </body>
 
