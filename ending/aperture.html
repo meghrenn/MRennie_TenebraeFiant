@@ -7,7 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-      <script src="../js/scripts.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/scripts.js"></script>
 </head>
 <style>
     body {
@@ -96,7 +97,6 @@
             </div>
         </div>
     </main>
-
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -110,7 +110,7 @@
     });
 
     $(document).ready(function () {
-             let paragraphs = $(".eldritch-speak, #fade-trigger, #continue");
+        let paragraphs = $(".eldritch-speak, #fade-trigger, #continue");
         let currentIndex = 0;
 
         // Initial fade-in of monster and first paragraph
