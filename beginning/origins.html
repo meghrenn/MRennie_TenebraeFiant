@@ -37,21 +37,32 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: #000000;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.5s ease;
-        z-index: 1000;
+        transition: opacity 1.5s ease;
+        z-index: 9999;
     }
 
-    #origin-list {
-        transition: opacity 0.5s ease;
-        opacity: 0;
-    }
-
-    #origin-list.visible {
+    #dark-overlay.show {
         opacity: 1;
+        transition: opacity 0s ease-in;
     }
+
+    #origin-text {
+        transition: opacity 0.5s ease;
+        /* opacity: 0; */
+    }
+
+    #origin-text>* {
+        transition: opacity 1s ease;
+        z-index: 1000;
+        position: relative;
+    }
+
+    /* #origin-text.visible {
+        opacity: 1;
+    } */
 </style>
 
 <body id="hist-grid" data-group-id="beginning" data-page-id="origins">
@@ -85,11 +96,11 @@
 
         <img id="worm" class="avail" src="../images/origins/worm3.png">
     </div>
+    <div id="dark-overlay"></div>
     <div id="header-container"></div>
 </body>
 <script>
     const histHold = document.getElementById('hist-hold');
-
     var audio = new Audio('../audio/page-move2.wav');
     audio.volume = 0.7;
     audio.playbackRate = 2;
@@ -145,10 +156,12 @@
             handleClick(event, "../puzzling/construction.html");
         });
     };
-    
+
+
     document.addEventListener('DOMContentLoaded', function () {
         const gameProgress = JSON.parse(localStorage.getItem('gameProgress')) || []; // Retrieve gameProgress from local storage
-        let histHoldChildren = document.querySelectorAll('#hist-hold > *'); // Get all child elements of #hist-hold
+        let histHoldChildren = document.querySelectorAll('#hist-hold > *');
+        let endAvail = false;
 
         // Iterate through each child element
         histHoldChildren.forEach(function (child) {
@@ -167,81 +180,160 @@
         });
 
         // Check if all specified groupIds are present in gameProgress
-        const requiredGroupIds = ['beginning', 'architect', 'place', 'puzzling', 'tunnel'];
+        const requiredGroupIds = ['beginning'];
         const allRequiredIdsPresent = requiredGroupIds.every(groupId =>
             gameProgress.some(item => item.groupId === groupId)
         );
+
         if (allRequiredIdsPresent) {
+            document.getElementById('origin-text').style.opacity = '0';
+            document.getElementById('dark-overlay').classList.add('show');
 
-//             document.getElementById('origin-list').innerHTML = `
-// <h1>Origins</h1>
-// <p>Something emerges from the depths....</p>
-// <p>A final vision, drawing close.</p>
-// <div class="center-container basic-padding marginal-margin">
-//     <div id="end" class="button basic-padding">start the end</div>
-// </div>`;
-
-
-    const originList = document.getElementById('origin-list');
-    const darkOverlay = document.getElementById('dark-overlay');
-
-      darkOverlay.style.opacity = '1';
-    originList.style.opacity = '0';
-
-    setTimeout(() => {
-      
-        originList.innerHTML = `
+            setTimeout(() => {
+                document.getElementById('origin-text').innerHTML = `
             <h1>Origins</h1>
             <p>Something emerges from the depths....</p>
             <p>A final vision, drawing close.</p>
             <div class="center-container basic-padding marginal-margin">
                 <div id="end" class="button basic-padding">start the end</div>
             </div>`;
-        originList.classList.add('visible');
 
-   
-        setTimeout(() => {
-            darkOverlay.style.opacity = '0';
-        }, 1000); // Adjust delay to control how long the dark overlay stays
-    }, 500); // Adjust delay to control how long the fade-out lasts
-}
+                endAvail = true;
+                setTimeout(() => {
+                    document.getElementById('dark-overlay').classList.remove('show');
+                }, 1000);
 
+                document.getElementById('origin-text').style.opacity = '1';
+                const children = document.getElementById('origin-text').children;
+                function fadeInElements(index = 0) {
+                    if (index < children.length) {
+                        children[index].style.opacity = '1';
+                        setTimeout(() => {
+                            fadeInElements(index + 1);
+                        }, 1500);
+                    }
+                }
 
+                // Initialize opacity to 0 for all children
+                for (let i = 0; i < children.length; i++) {
+                    children[i].style.opacity = '0';
+                }
+                fadeInElements();
 
-            // const overlay = document.createElement('div');
-            // overlay.style.position = 'fixed';
-            // overlay.style.top = 0;
-            // overlay.style.left = 0;
-            // overlay.style.width = '100%';
-            // overlay.style.height = '100%';
-            // overlay.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-            // overlay.style.zIndex = 1000;
-            // overlay.style.transition = 'background-color 1s ease-in-out';
-            // document.body.appendChild(overlay);
+            }, 500); // Adjust delay to control how long the fade-out lasts
+        }
 
-            // const outerContainer = document.createElement('div');
-            // outerContainer.classList.add('center-container', 'basic-padding', 'marginal-margin');
+        console.log("5678");
 
-            // const continueButton = document.createElement('div');
-            // continueButton.id = 'continue';
-            // continueButton.classList.add('button', 'basic-padding');
-            // continueButton.textContent = 'You have seen enough';
+        // Use a mutation observer to detect changes to the 'end' element
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length > 0) {
+                    const endElement = document.getElementById("end");
+                    if (endElement) {
+                        endElement.addEventListener("click", function () {
+                            console.log("VBN");
+                            document.body.style.backgroundColor = 'var(--green-dark)';
 
-            // outerContainer.appendChild(continueButton);
-            // overlay.appendChild(outerContainer);
+                            document.getElementById("main-header").style.backgroundColor = 'var(--green-medium)';
+                            setTimeout(function () {
+                                document.body.style.backgroundColor = '';
+                                document.getElementById("main-header").style.backgroundColor = '';
+                                window.location.href = "../ending/encroaching-end.html";
+                            }, 700);
 
-            // outerContainer.style.position = 'absolute';
-            // outerContainer.style.top = '50%';
-            // outerContainer.style.left = '50%';
-            // outerContainer.style.transform = 'translate(-50%, -50%)';
+                        });
+                        observer.disconnect(); // Stop observing after the event listener is added
+                    }
+                }
+            });
+        });
 
-            // setTimeout(() => {
-            //     overlay.style.backgroundColor = 'rgba(0, 0, 0, 1)';
-            // }, 10); // Small delay to ensure the transition works
-            // continueButton.addEventListener('click', function () {
-            //     window.location.href = '../ending/encroaching-end.html';
-            // });
+        // Observe changes to the #origin-text element
+        observer.observe(document.getElementById('origin-text'), { childList: true });
     });
+
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     const gameProgress = JSON.parse(localStorage.getItem('gameProgress')) || []; // Retrieve gameProgress from local storage
+    //     let histHoldChildren = document.querySelectorAll('#hist-hold > *');
+    //     let endAvail = false;
+    //     // Iterate through each child element
+    //     histHoldChildren.forEach(function (child) {
+    //         let childId = child.id;
+
+    //         // Check if the ID matches any pageId or groupId in the array
+    //         let matchFound = gameProgress.some(function (item) {
+    //             return item.pageId === childId || item.groupId === childId;
+    //         });
+
+    //         if (matchFound) {
+    //             child.classList.add('seen');
+    //             child.classList.remove('locked');
+    //             child.classList.remove('avail');
+    //         }
+    //     });
+
+
+    //     // Check if all specified groupIds are present in gameProgress
+    //     const requiredGroupIds = ['beginning',
+    //         // 'architect', 'place', 'puzzling', 'tunnel'
+    //     ];
+    //     const allRequiredIdsPresent = requiredGroupIds.every(groupId =>
+    //         gameProgress.some(item => item.groupId === groupId)
+    //     );
+    //     if (allRequiredIdsPresent) {
+    //         document.getElementById('origin-text').style.opacity = '0';
+    //         document.getElementById('dark-overlay').classList.add('show');
+    //         setTimeout(() => {
+    //             document.getElementById('origin-text').innerHTML = `
+    //             <h1>Origins</h1>
+    //             <p>Something emerges from the depths....</p>
+    //             <p>A final vision, drawing close.</p>
+    //             <div class="center-container basic-padding marginal-margin">
+    //                 <div id="end" class="button basic-padding">start the end</div>
+    //             </div>`;
+    //             endAvail = true;
+    //             setTimeout(() => {
+    //                 document.getElementById('dark-overlay').classList.remove('show');
+    //             }, 1000);
+
+    //             document.getElementById('origin-text').style.opacity = '1';
+    //             const children = document.getElementById('origin-text').children;
+    //             function fadeInElements(index = 0) {
+    //                 if (index < children.length) {
+    //                     children[index].style.opacity = '1';
+    //                     setTimeout(() => {
+    //                         fadeInElements(index + 1);
+    //                     }, 1500);
+    //                 }
+    //             }
+
+    //             // Initialize opacity to 0 for all children
+    //             for (let i = 0; i < children.length; i++) {
+    //                 children[i].style.opacity = '0';
+    //             }
+    //             fadeInElements();
+
+    //         }, 500); // Adjust delay to control how long the fade-out lasts
+    //     }
+    //     console.log("5678");
+    //     if (endAvail) {
+    //         console.log("tyu");
+    //         document.getElementById("end").addEventListener("click", function () {
+    //             console.log("VBN");
+    //             document.body.style.backgroundColor = 'var(--green-dark)';
+
+    //             document.getElementById("main-header").style.backgroundColor = 'var(--green-medium)';
+    //             setTimeout(function () {
+    //                 document.body.style.backgroundColor = '';
+    //                 document.getElementById("main-header").style.backgroundColor = ')';
+    //                 window.location.href = "../ending/encroaching-end.html";
+    //             }, 700);
+
+    //         });
+    //     }
+    // });
 
     const choseTail = localStorage.getItem('choseTail') === 'true';
 
@@ -252,6 +344,7 @@
         document.getElementById('tale').classList.add('locked');
         document.getElementById('tale').classList.remove('avail');
     }
+
 
 
     window.addEventListener('scroll', function () {
