@@ -30,10 +30,32 @@
         box-shadow: none !important;
         animation: none !important;
     }
+
+    #dark-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+        z-index: 1000;
+    }
+
+    #origin-list {
+        transition: opacity 0.5s ease;
+        opacity: 0;
+    }
+
+    #origin-list.visible {
+        opacity: 1;
+    }
 </style>
 
-<body id="hist-grid" class="medium" data-group-id="beginning" data-page-id="origins">
-    <header class=" medium" id="main-header">
+<body id="hist-grid" data-group-id="beginning" data-page-id="origins">
+    <header id="main-header">
         <ul>
             <li id="about" class="basic-padding">About</li>
             <li id="help" class="basic-padding">Trouble</li>
@@ -64,170 +86,189 @@
         <img id="worm" class="avail" src="../images/origins/worm3.png">
     </div>
     <div id="header-container"></div>
+</body>
+<script>
+    const histHold = document.getElementById('hist-hold');
 
-    <script>
-        const histHold = document.getElementById('hist-hold');
+    var audio = new Audio('../audio/page-move2.wav');
+    audio.volume = 0.7;
+    audio.playbackRate = 2;
+    histHold.addEventListener('mouseover', function (event) {
+        if (event.target.closest('#hist-hold')) {
+            audio.play();
+        }
+    });
 
-        var audio = new Audio('../audio/page-move2.wav');
-        audio.volume = 0.7;
-        audio.playbackRate = 2;
-        histHold.addEventListener('mouseover', function (event) {
-            if (event.target.closest('#hist-hold')) {
-                audio.play();
+    window.onload = function () {
+        function handleClick(event, url) {
+            if (event.target.classList.contains('locked')) {
+                event.preventDefault();
+            } else {
+                window.location.href = url;
             }
-        });
-
-        window.onload = function () {
-            // Function to handle click events
-            function handleClick(event, url) {
-                // Check if the clicked element has the class "locked"
-                if (event.target.classList.contains('locked')) {
-                    event.preventDefault(); // Prevent the default action (navigation)
-                } else {
-                    window.location.href = url;
-                }
-            }
-
-            document.getElementById("worm").addEventListener("click", function (event) {
-                handleClick(event, "../tunnel/worm.html");
-            });
-            document.getElementById("fog").addEventListener("click", function (event) {
-                handleClick(event, "../architect/fog.html");
-            });
-            // document.getElementById("strike1").addEventListener("click", function (event) {
-            //     handleClick(event, "../strike/2022.html");
-            // });
-            // document.getElementById("strike2").addEventListener("click", function (event) {
-            //     handleClick(event, "../strike/2022.html");
-            // });
-            document.getElementById("ameliorate").addEventListener("click", function (event) {
-                handleClick(event, "../meliorist/ameliorate.html");
-            });
-            document.getElementById("logo").addEventListener("click", function (event) {
-                handleClick(event, "../monster/logo.html");
-            });
-            document.getElementById("tale").addEventListener("click", function (event) {
-                handleClick(event, "../tale/goodbye.html");
-            });
-            document.getElementById("west").addEventListener("click", function (event) {
-                handleClick(event, "../place/west.html");
-            });
-            document.getElementById("above").addEventListener("click", function (event) {
-                handleClick(event, "../place/above.html");
-            });
-            document.getElementById("puzzle").addEventListener("click", function (event) {
-                handleClick(event, "../puzzling/puzzle.html");
-            });
-            document.getElementById("unearthed").addEventListener("click", function (event) {
-                handleClick(event, "../meliorist/unearthed.html");
-            });
-            document.getElementById("construction").addEventListener("click", function (event) {
-                handleClick(event, "../puzzling/construction.html");
-            });
-        };
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const gameProgress = JSON.parse(localStorage.getItem('gameProgress')) || []; // Retrieve gameProgress from local storage
-            let histHoldChildren = document.querySelectorAll('#hist-hold > *'); // Get all child elements of #hist-hold
-
-            // Iterate through each child element
-            histHoldChildren.forEach(function (child) {
-                let childId = child.id;
-
-                // Check if the ID matches any pageId or groupId in the array
-                let matchFound = gameProgress.some(function (item) {
-                    return item.pageId === childId || item.groupId === childId;
-                });
-
-                if (matchFound) {
-                    child.classList.add('seen');
-                    child.classList.remove('locked');
-                    child.classList.remove('avail');
-                }
-            });
-
-            // Check if all specified groupIds are present in gameProgress
-            const requiredGroupIds = ['beginning', 'architect', 'place', 'puzzling', 'tunnel'];
-            const allRequiredIdsPresent = requiredGroupIds.every(groupId =>
-                gameProgress.some(item => item.groupId === groupId)
-            );
-            if (allRequiredIdsPresent) {
-
-
-
-
-// change contents of #origin - list
-
-
-//                     < h1 > Origins</h1 >
-//             <p>Something emerges from the depths....</p>
-//             <p>Are you ready to face my last vision?</p>
-
-
-
-                const overlay = document.createElement('div');
-                overlay.style.position = 'fixed';
-                overlay.style.top = 0;
-                overlay.style.left = 0;
-                overlay.style.width = '100%';
-                overlay.style.height = '100%';
-                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-                overlay.style.zIndex = 1000;
-                overlay.style.transition = 'background-color 1s ease-in-out';
-                document.body.appendChild(overlay);
-
-                const outerContainer = document.createElement('div');
-                outerContainer.classList.add('center-container', 'basic-padding', 'marginal-margin');
-
-                const continueButton = document.createElement('div');
-                continueButton.id = 'continue';
-                continueButton.classList.add('button', 'basic-padding');
-                continueButton.textContent = 'You have seen enough';
-
-                outerContainer.appendChild(continueButton);
-                overlay.appendChild(outerContainer);
-
-                outerContainer.style.position = 'absolute';
-                outerContainer.style.top = '50%';
-                outerContainer.style.left = '50%';
-                outerContainer.style.transform = 'translate(-50%, -50%)';
-
-                setTimeout(() => {
-                    overlay.style.backgroundColor = 'rgba(0, 0, 0, 1)';
-                }, 10); // Small delay to ensure the transition works
-                continueButton.addEventListener('click', function () {
-                    window.location.href = '../ending/encroaching-end.html';
-                });
-            }
-        });
-
-        const choseTail = localStorage.getItem('choseTail') === 'true';
-
-        if (choseTail) {
-            document.getElementById('tale').classList.add('avail');
-            document.getElementById('tale').classList.remove('locked');
-        } else {
-            document.getElementById('tale').classList.add('locked');
-            document.getElementById('tale').classList.remove('avail');
         }
 
-
-        window.addEventListener('scroll', function () {
-            const scrollTop = window.scrollY;
-            const windowHeight = window.innerHeight;
-            const pageHeight = histHold.offsetHeight;
-            const opacity = 0 + (scrollTop / (pageHeight - windowHeight));
-
-            let darkeningElement = document.querySelector('.darken');
-            if (!darkeningElement) {
-                darkeningElement = document.createElement('div');
-                darkeningElement.classList.add('darken');
-                document.body.appendChild(darkeningElement);
-            }
-
-            darkeningElement.style.opacity = opacity;
+        document.getElementById("worm").addEventListener("click", function (event) {
+            handleClick(event, "../tunnel/worm.html");
         });
-    </script>
-</body>
+        document.getElementById("fog").addEventListener("click", function (event) {
+            handleClick(event, "../architect/fog.html");
+        });
+        // document.getElementById("strike1").addEventListener("click", function (event) {
+        //     handleClick(event, "../strike/2022.html");
+        // });
+        // document.getElementById("strike2").addEventListener("click", function (event) {
+        //     handleClick(event, "../strike/2022.html");
+        // });
+        document.getElementById("ameliorate").addEventListener("click", function (event) {
+            handleClick(event, "../meliorist/ameliorate.html");
+        });
+        document.getElementById("logo").addEventListener("click", function (event) {
+            handleClick(event, "../monster/logo.html");
+        });
+        document.getElementById("tale").addEventListener("click", function (event) {
+            handleClick(event, "../tale/goodbye.html");
+        });
+        document.getElementById("west").addEventListener("click", function (event) {
+            handleClick(event, "../place/west.html");
+        });
+        document.getElementById("above").addEventListener("click", function (event) {
+            handleClick(event, "../place/above.html");
+        });
+        document.getElementById("puzzle").addEventListener("click", function (event) {
+            handleClick(event, "../puzzling/puzzle.html");
+        });
+        document.getElementById("unearthed").addEventListener("click", function (event) {
+            handleClick(event, "../meliorist/unearthed.html");
+        });
+        document.getElementById("construction").addEventListener("click", function (event) {
+            handleClick(event, "../puzzling/construction.html");
+        });
+    };
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        const gameProgress = JSON.parse(localStorage.getItem('gameProgress')) || []; // Retrieve gameProgress from local storage
+        let histHoldChildren = document.querySelectorAll('#hist-hold > *'); // Get all child elements of #hist-hold
+
+        // Iterate through each child element
+        histHoldChildren.forEach(function (child) {
+            let childId = child.id;
+
+            // Check if the ID matches any pageId or groupId in the array
+            let matchFound = gameProgress.some(function (item) {
+                return item.pageId === childId || item.groupId === childId;
+            });
+
+            if (matchFound) {
+                child.classList.add('seen');
+                child.classList.remove('locked');
+                child.classList.remove('avail');
+            }
+        });
+
+        // Check if all specified groupIds are present in gameProgress
+        const requiredGroupIds = ['beginning', 'architect', 'place', 'puzzling', 'tunnel'];
+        const allRequiredIdsPresent = requiredGroupIds.every(groupId =>
+            gameProgress.some(item => item.groupId === groupId)
+        );
+        if (allRequiredIdsPresent) {
+
+//             document.getElementById('origin-list').innerHTML = `
+// <h1>Origins</h1>
+// <p>Something emerges from the depths....</p>
+// <p>A final vision, drawing close.</p>
+// <div class="center-container basic-padding marginal-margin">
+//     <div id="end" class="button basic-padding">start the end</div>
+// </div>`;
+
+
+    const originList = document.getElementById('origin-list');
+    const darkOverlay = document.getElementById('dark-overlay');
+
+      darkOverlay.style.opacity = '1';
+    originList.style.opacity = '0';
+
+    setTimeout(() => {
+      
+        originList.innerHTML = `
+            <h1>Origins</h1>
+            <p>Something emerges from the depths....</p>
+            <p>A final vision, drawing close.</p>
+            <div class="center-container basic-padding marginal-margin">
+                <div id="end" class="button basic-padding">start the end</div>
+            </div>`;
+        originList.classList.add('visible');
+
+   
+        setTimeout(() => {
+            darkOverlay.style.opacity = '0';
+        }, 1000); // Adjust delay to control how long the dark overlay stays
+    }, 500); // Adjust delay to control how long the fade-out lasts
+}
+
+
+
+            // const overlay = document.createElement('div');
+            // overlay.style.position = 'fixed';
+            // overlay.style.top = 0;
+            // overlay.style.left = 0;
+            // overlay.style.width = '100%';
+            // overlay.style.height = '100%';
+            // overlay.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+            // overlay.style.zIndex = 1000;
+            // overlay.style.transition = 'background-color 1s ease-in-out';
+            // document.body.appendChild(overlay);
+
+            // const outerContainer = document.createElement('div');
+            // outerContainer.classList.add('center-container', 'basic-padding', 'marginal-margin');
+
+            // const continueButton = document.createElement('div');
+            // continueButton.id = 'continue';
+            // continueButton.classList.add('button', 'basic-padding');
+            // continueButton.textContent = 'You have seen enough';
+
+            // outerContainer.appendChild(continueButton);
+            // overlay.appendChild(outerContainer);
+
+            // outerContainer.style.position = 'absolute';
+            // outerContainer.style.top = '50%';
+            // outerContainer.style.left = '50%';
+            // outerContainer.style.transform = 'translate(-50%, -50%)';
+
+            // setTimeout(() => {
+            //     overlay.style.backgroundColor = 'rgba(0, 0, 0, 1)';
+            // }, 10); // Small delay to ensure the transition works
+            // continueButton.addEventListener('click', function () {
+            //     window.location.href = '../ending/encroaching-end.html';
+            // });
+    });
+
+    const choseTail = localStorage.getItem('choseTail') === 'true';
+
+    if (choseTail) {
+        document.getElementById('tale').classList.add('avail');
+        document.getElementById('tale').classList.remove('locked');
+    } else {
+        document.getElementById('tale').classList.add('locked');
+        document.getElementById('tale').classList.remove('avail');
+    }
+
+
+    window.addEventListener('scroll', function () {
+        const scrollTop = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const pageHeight = histHold.offsetHeight;
+        const opacity = 0 + (scrollTop / (pageHeight - windowHeight));
+
+        let darkeningElement = document.querySelector('.darken');
+        if (!darkeningElement) {
+            darkeningElement = document.createElement('div');
+            darkeningElement.classList.add('darken');
+            document.body.appendChild(darkeningElement);
+        }
+
+        darkeningElement.style.opacity = opacity;
+    });
+</script>
 
 </html>

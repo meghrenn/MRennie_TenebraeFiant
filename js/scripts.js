@@ -147,16 +147,19 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("progress-list").appendChild(ul);
   }
 
-  // Fetch the header content and create the progress list after it's done
-  fetchHeaderContent()
-    .then(() => {
-      // Call the function to create the progress list
-      createProgressList();
-    })
-    .catch(error => {
-      // Handle errors here if needed
-      console.error('Failed to load header and create progress list:', error);
-    });
+
+  if (document.getElementById('main-header')) {
+    // Fetch the header content and create the progress list after it's done
+    fetchHeaderContent()
+      .then(() => {
+        // Call the function to create the progress list
+        createProgressList();
+      })
+      .catch(error => {
+        // Handle errors here if needed
+        console.error('Failed to load header and create progress list:', error);
+      });
+  }
 
 
 

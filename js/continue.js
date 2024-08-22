@@ -38,22 +38,27 @@
 
 
 
-var continuePage = {
-    "level": "cont-architect",
-    "collapse": "cont-architect",
-    "unearthed": "cont-meliorist",
-    "like-light": "cont-tunnel",
-    "logo": "cont-puzzling",
-    "fear": "cont-tale",
-    "niitsitapi": "cont-place"
-    // architect -> failure ?
-    // tunnel -> evil - light ?
-    // place -> pessimism ?
-}
-var currentPage = document.body.getAttribute("data-page-id");
-var correctContinue = continuePage[currentPage];
+
 
 document.addEventListener('DOMContentLoaded', function () {
+    var continuePage = {
+        "level": "cont-architect",
+        "collapse": "cont-architect",
+        "unearthed": "cont-meliorist",
+        "like-light": "cont-tunnel",
+        "logo": "cont-puzzling",
+        "fear": "cont-tale",
+        "niitsitapi": "cont-place",
+
+        //???
+        "failure": "cont-architect",
+        "pessimism": "cont-place",
+        // tunnel -> evil - light ?
+    }
+
+    var currentPage = document.body.getAttribute("data-page-id");
+    var correctContinue = continuePage[currentPage];
+
     document.getElementById("continue").addEventListener("click", function () {
         document.body.style.backgroundColor = 'var(--green-dark)';
 
@@ -69,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 mainHeader.style.backgroundColor = '';
             }
 
-            window.location.href = correctContinue + ".html";
+            window.location.href = "../continue/" + correctContinue + ".html";
         }, 700);
     });
 });
