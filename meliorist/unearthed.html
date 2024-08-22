@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/scripts.js"></script>
+    <script src="../js/continue.js"></script>
 </head>
 <style>
     #text-solution {
@@ -23,6 +24,11 @@
         object-fit: fill;
         z-index: 3;
         pointer-events: none;
+        transition: opacity 2s ease;
+    }
+
+    #continue {
+        opacity: 0;
         transition: opacity 2s ease;
     }
 </style>
@@ -47,6 +53,9 @@
                 Sometimes you need obfuscation to truly bring things to the surface. </p>
             <p>Take this with you. You'll need it later, but it only works for innovators. Get into the zone to figure
                 this out.</p>
+            <div class="center-container basic-padding marginal-margin">
+                <div id="continue" class="button basic-padding">Continue</div>
+            </div>
     </main>
     <div id="header-container"></div>
 
@@ -67,7 +76,7 @@
     earth.width = window.innerWidth;
     earth.height = window.innerHeight;
     var maxWidth = earth.width - 150;
-    document.body.appendChild(earth); 
+    document.body.appendChild(earth);
 
     const ctx = earth.getContext('2d'); // Get the 2D rendering context for the canvas
     ctx.willReadFrequently = true;
@@ -102,7 +111,7 @@
 
 
     document.addEventListener("DOMContentLoaded", function () {
-            function hexToRGBA(hex, opacity) {
+        function hexToRGBA(hex, opacity) {
             // Remove '#' if present
             hex = hex.replace('#', '');
 
@@ -154,55 +163,6 @@
 
             ctx.stroke();
         }
-        // // 3) Draw gray lopsided circles sporadically over the rectangle with rough borders
-        // ctx.strokeStyle = '#3c4842';
-        // ctx.fillStyle = '#6c7771';
-        // ctx.lineWidth = 3; // Set line width
-        // ctx.lineCap = 'round'; // Set line cap to round
-        // ctx.lineJoin = 'round'; // Set line join to round
-
-        // for (let i = 0; i < 20; i++) {
-        //     const x = Math.random() * earth.width;
-        //     const y = Math.random() * earth.height;
-        //     const radius = 2 + Math.random() * 5; // Random radius between 2 and 7
-
-        //     ctx.beginPath();
-        //     // Draw a series of short lines around the perimeter of the circle to create a rough border
-        //     for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 36) {
-        //         const xOffset = Math.cos(angle) * radius * (0.8 + Math.random() * 0.4); // Randomly vary the distance from the center
-        //         const yOffset = Math.sin(angle) * radius * (0.8 + Math.random() * 0.4); // Randomly vary the distance from the center
-        //         ctx.lineTo(x + xOffset, y + yOffset);
-        //     }
-        //     ctx.closePath();
-        //     ctx.stroke();
-        //     ctx.fill();
-        // }
-
-        // // // 4) Draw a scattering of fallen leaves with different rotations
-        // // ctx.fillStyle = '#88a882'; // Set fill style for leaves
-
-        // // for (let i = 0; i < 30; i++) {
-        // //     const x = Math.random() * earth.width;
-        // //     const y = Math.random() * earth.height;
-        // //     const size = 5 + Math.random() * 10; // Random leaf size
-        // //     const rotation = Math.random() * Math.PI * 2; // Random rotation angle
-
-        // //     ctx.save(); // Save the current canvas state
-        // //     ctx.translate(x, y); // Translate to leaf position
-        // //     ctx.rotate(rotation); // Rotate the canvas
-        // //     ctx.translate(-x, -y); // Translate back to original position
-
-        // //     ctx.beginPath();
-        // //     ctx.moveTo(x, y);
-
-        // //     // Draw a bezier curve to represent the leaf shape
-        // //     ctx.bezierCurveTo(x - size / 2, y - size / 2, x - size / 4, y + size / 2, x, y + size * 2);
-        // //     ctx.bezierCurveTo(x + size / 4, y + size / 2, x + size / 2, y - size / 2, x, y);
-
-        // //     ctx.fill(); // Fill the leaf shape
-
-        // //     ctx.restore(); // Restore the saved canvas state
-        // // }
 
         // 5) Cover the brown rectangle with scattered lines resembling pine needles
         ctx.strokeStyle = hexToRGBA('#4C405C', 0.8);
@@ -274,12 +234,14 @@
             earth.style.opacity = '0';
             document.getElementById('text-solution').style.opacity = '';
             document.getElementById('image-solution').classList.add("solved");
+            document.getElementById("continue").style.opacity = '1';
         }
     }
 
     document.getElementById("unearth-story").addEventListener("click", function () {
         if (diggingsDone) {
             window.location.href = "https://digitallibrary.uleth.ca/digital/collection/publications/id/6797/rec/26";
+
         }
     });
 

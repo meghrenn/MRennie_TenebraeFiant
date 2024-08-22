@@ -41,9 +41,9 @@
         </ul>
     </header>
     <div id="hist-hold">
-        <div class="thick-padding containment">
+        <div id="origin-text" class="thick-padding containment">
             <h1>Origins</h1>
-            <p>I can feel another vision coming on. No—not one vision, but many.</p>
+            <p class>I can feel another vision coming on. No—not one vision, but many.</p>
             <p class="tangent">(A whirlwind of imagery, a twister of historical particulate.)</p>
             <p>They feel like memories, real scenes that played out. How far back can I see?
                 How deep does this go?</p>
@@ -151,8 +151,20 @@
             const allRequiredIdsPresent = requiredGroupIds.every(groupId =>
                 gameProgress.some(item => item.groupId === groupId)
             );
-
             if (allRequiredIdsPresent) {
+
+
+
+
+// change contents of #origin - list
+
+
+//                     < h1 > Origins</h1 >
+//             <p>Something emerges from the depths....</p>
+//             <p>Are you ready to face my last vision?</p>
+
+
+
                 const overlay = document.createElement('div');
                 overlay.style.position = 'fixed';
                 overlay.style.top = 0;

@@ -335,7 +335,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var pagePasswords = {
     "initiation": "l",
-    "file": "placeholder",
     "architect": "river",
     "future": "2267",
     "lettuce": "200",
