@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/logo/favicon.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/continue.css">
+    <script src="../js/scripts.js"></script>
+</head>
+
+<body data-group-id="continue" data-page-id="five">
+    <!-- <header id="main-header">
+        <ul>
+            <li id="about" class="basic-padding">About</li>
+            <li id="help" class="basic-padding">Trouble</li>
+            <li id="progress" class="basic-padding">Progress</li>
+        </ul>
+    </header> -->
+    <main class="thick-padding containment right-container">
+        <!-- <h1>Architect</h1> -->
+
+    </main>
+
+    <div class="falling-container"></div>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const container = document.querySelector('.falling-container');
+        const body = document.body;
+
+        const borderRadiusSet1 = '15% 40px 25% 5em / 30px 50% 20px 2em';
+        const borderRadiusSet2 = '15px 5px 30% 2em / 30% 20% 2px 4em';
+        const borderRadiusSet3 = '10% 20px 40% 3em / 20% 30% 12px 3em';
+
+        const borderRadiusSets = [borderRadiusSet1, borderRadiusSet2, borderRadiusSet3];
+
+        function createRock(size, duration, delay, leftPosition, borderRadiusSet) {
+            const rock = document.createElement('div');
+            rock.classList.add('rock');
+            rock.style.width = size + 'px';
+            rock.style.height = size + 'px';
+            rock.style.animationDuration = duration + 's';
+            rock.style.animationDelay = delay + 's';
+            rock.style.left = leftPosition + '%';
+            rock.style.borderRadius = borderRadiusSet;
+
+            container.appendChild(rock);
+        }
+
+        function createSand(duration, delay, leftPosition) {
+            const sand = document.createElement('div');
+            sand.classList.add('sand');
+            sand.style.animationDuration = duration + 's';
+            sand.style.animationDelay = delay + 's';
+            sand.style.left = leftPosition + '%';
+
+            container.appendChild(sand);
+        }
+
+        const totalRocks = 30;
+
+        // Create rocks and sand particles
+        for (let i = 0; i < totalRocks; i++) {
+            const rockSize = Math.random() * 100 + 20; // Random size between 20px and 70px
+            const rockDuration = Math.random() * 0.5 + 0.5; // Faster duration between 3s and 5s
+            const rockDelay = Math.random() * 3; // Random delay between 0s and 0.5s
+            const rockLeft = Math.random() * 100; // Random horizontal position between 0% and 100%
+
+            // Determine which border-radius set to use based on the rock's index
+            const borderRadiusSet = borderRadiusSets[Math.floor(i / (totalRocks / 3))];
+
+            // Create the rock with the selected border-radius
+            createRock(rockSize, rockDuration, rockDelay, rockLeft, borderRadiusSet);
+
+            // Create sand particles 
+            for (let j = 0; j < 30; j++) {
+                const sandDuration = Math.random() * 0.5 + 0;
+                const sandDelay = Math.random() * 5; // Increased delay range for more staggering (0s to 1.5s)
+                const sandLeft = rockLeft + Math.random() * 10 - 5;
+
+                createSand(sandDuration, sandDelay, sandLeft);
+            }
+        }
+    });
+</script>
+
+</html>

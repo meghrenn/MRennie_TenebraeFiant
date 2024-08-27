@@ -1,0 +1,62 @@
+    *,
+    p,
+    .tangent {
+        color: #000000;
+    }
+
+    .button {
+        color: #ffffff;
+        background-color: #6b5e53;
+        border: 1px solid #6b5e53;
+        -webkit-box-shadow: 0px 5px 0px #4a4036 !important;
+        -moz-box-shadow: 0px 5px 0px #4a4036 !important;
+        -ms-box-shadow: 0px 5px 0px #4a4036 !important;
+        -o-box-shadow: 0px 5px 0px #4a4036 !important;
+        box-shadow: 0px 5px 0px #4a4036 !important;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #e0cda9;
+    }
+
+    .falling-container {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        pointer-events: none;
+    }
+
+    .rock {
+        position: absolute;
+        top: -130px;
+        /* hide above the viewport */
+        background-color: #6b5e53;
+        border-radius: 15% 40px 25% 5em / 30px 50% 20px 2em;
+        opacity: 0.9;
+        animation: fall linear forwards;
+        box-shadow: inset -2px -2px 8px #4a4036, inset 2px 2px 8px #8c7c71;
+    }
+
+    .sand {
+        position: absolute;
+        top: -50px;
+        width: 5px;
+        height: 5px;
+        background-color: #bf8732;
+        opacity: 0.8;
+        border-radius: 50%;
+        animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(0) rotate(0deg);
+        }
+
+        100% {
+            transform: translateY(120vh) rotate(95deg);
+        }
+    }

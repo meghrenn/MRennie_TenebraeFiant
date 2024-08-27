@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falling Rocks and Sand Animation</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+<style>
+    /* styles.css */
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        /* background-color: #e0cda9; */
+                background-color: #ffffff;
+        /* Sand-like background color */
+    }
+
+    .falling-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        pointer-events: none;
+    }
+
+    .rock {
+        position: absolute;
+        top: -100px;
+        /* Start just above the viewport */
+        background-color: #6b5e53;
+        border-radius: 15% 40px 25% 5em / 30px 50% 20px 2em;
+        /* Rugged, irregular shape */
+        opacity: 0.9;
+        animation: fall linear infinite;
+        box-shadow: inset -2px -2px 8px #4a4036, inset 2px 2px 8px #8c7c71;
+    }
+
+    .sand {
+        position: absolute;
+        top: -50px;
+        /* Start just above the viewport */
+        width: 5px;
+        height: 5px;
+        background-color: #d4b484;
+        opacity: 0.8;
+        border-radius: 50%;
+        animation: fall linear infinite;
+    }
+
+    /* Animation keyframes */
+    @keyframes fall {
+        0% {
+            transform: translateY(0) rotate(0deg);
+        }
+
+        100% {
+            transform: translateY(100vh) rotate(95deg);
+        }
+    }
+</style>
+
+<body>
+    <div class="falling-container"></div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const container = document.querySelector('.falling-container');
+
+        // Define the border-radius sets
+        const borderRadiusSet1 = '15% 40px 25% 5em / 30px 40% 20px 2em';
+        const borderRadiusSet2 = '20% 20% 30% 2em / 30% 20% 2px 4em';
+        // const borderRadiusSet3 = '10% 20px 40% 3em / 20% 30% 12px 3em';
+        const borderRadiusSet3 = '20% 30% / 40% 20%';
+
+        // Array of the different border-radius sets
+        const borderRadiusSets = [borderRadiusSet1, borderRadiusSet2, borderRadiusSet3];
+
+        // Function to create a rock
+        function createRock(size, duration, delay, leftPosition, borderRadiusSet) {
+            const rock = document.createElement('div');
+            rock.classList.add('rock');
+            rock.style.width = size + 'px';
+            rock.style.height = size + 'px';
+            rock.style.animationDuration = duration + 's';
+            rock.style.animationDelay = delay + 's';
+            rock.style.left = leftPosition + '%';
+            rock.style.borderRadius = borderRadiusSet;
+
+            container.appendChild(rock);
+        }
+
+        // Function to create sand particle
+        function createSand(duration, delay, leftPosition) {
+            const sand = document.createElement('div');
+            sand.classList.add('sand');
+            sand.style.animationDuration = duration + 's';
+            sand.style.animationDelay = delay + 's';
+            sand.style.left = leftPosition + '%';
+
+            container.appendChild(sand);
+        }
+
+        // Total number of rocks to create
+        const totalRocks = 15;
+
+        // Create rocks and sand particles
+        for (let i = 0; i < totalRocks; i++) {
+            const rockSize = Math.random() * 50 + 20; // Random size between 20px and 70px
+            const rockDuration = Math.random() * 1 + 0.5; // Faster duration between 7s and 8s
+            const rockDelay = Math.random() * 0.5; // Random delay between 0s and 0.5s
+            const rockLeft = Math.random() * 100; // Random horizontal position between 0% and 100%
+
+            // Determine which border-radius set to use based on the rock's index
+            const borderRadiusSet = borderRadiusSets[Math.floor(i / (totalRocks / 3))];
+
+            // Create the rock with the selected border-radius
+            createRock(rockSize, rockDuration, rockDelay, rockLeft, borderRadiusSet);
+
+            // Create multiple sand particles for each rock
+            for (let j = 0; j < 15; j++) {
+                const sandDuration = Math.random() * 0.5 + 0.3; // Faster duration between 0.3s and 0.8s
+                const sandDelay = Math.random() * 0.5; // Random delay between 0s and 0.5s
+                const sandLeft = rockLeft + Math.random() * 10 - 5; // Slightly random position around the rock
+
+                createSand(sandDuration, sandDelay, sandLeft);
+            }
+        }
+    });
+
+</script>
+
+</html>
