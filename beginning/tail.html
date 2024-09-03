@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/scripts.js"></script>
-    <script src="../js/continue.js"></script>
 </head>
 
 <body data-group-id="beginning" data-page-id="tail">
@@ -30,5 +29,16 @@
     </main>
     <div id="header-container"></div>
 </body>
+<script>
+    document.getElementById("continue").addEventListener("click", function () {
+        document.body.style.backgroundColor = 'var(--green-dark)';
+        document.getElementById("main-header").style.backgroundColor = 'var(--green-medium)';
+        setTimeout(function () {
+            document.body.style.backgroundColor = '';
+            document.getElementById("main-header").style.backgroundColor = '';
+            window.location.href = "origins.html";
+        }, 700);
+    });
+</script>
 
 </html>
