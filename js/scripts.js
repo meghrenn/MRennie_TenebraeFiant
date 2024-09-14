@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-  // localStorage.removeItem('gameProgress');
+  localStorage.removeItem('gameProgress');
   // reset progress^
 
   //tracking user progress and checking passwords
