@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function () {
     "fog": "architect",
     "architect": "collapse",
     "future": "congrats",
-    "goodbye": "../monster/fear",
+    "goodbye": "piano",
     "collapse": "../begin/origins",
     "explanation": "../begin/initiation",
     "secret-stairs": "logo",
@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function () {
     "architect": "river",
     "future": "2267",
     "lettuce": "200",
-    "goodbye": "fear",
+    "goodbye": "piano",
     "secret-stairs": "coy",
     "encroaching-end": "aperture",
   };

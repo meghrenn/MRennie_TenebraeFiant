@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en-CAN">
+
+<head>
+    <title>Amusing Music</title>
+    <link rel="icon" type="image/png" href="../images/logo/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="../js/scripts.js"></script>
+</head>
+
+<body data-group-id="tale" data-page-id="piano">
+    <header id="main-header">
+        <ul>
+            <li id="about" class="basic-padding">About</li>
+            <li id="help" class="basic-padding">Trouble</li>
+            <li id="progress" class="basic-padding">Progress</li>
+        </ul>
+    </header>
+    <main class="thick-padding containment">
+        <div class="right-container">
+            <h1>Piano</h1>
+            <p>I’m no musician by any stretch of the imagination. At times when there’s nobody else playing in the
+                breezeway, though, I stop by and prod at the piano keys, myself.
+            </p>
+            <p class="tangent">(Crude, like a chicken pecking at seeds.)</p>
+
+            <div class="thick-padding">
+                <h1>Collapse</h1>
+                <!-- audio player adapted from https://codepen.io/MM-Z-the-animator/pen/yLQjyam -->
+                <div class="center-container">
+                    <div class="aWrap marginal-margin">
+                        <div class="range">
+                            <span class="under-ranger"></span>
+                            <input class="aSeek" type="range" min="0" value="0" step="1" disabled><span
+                                class="change-range"></span>
+                        </div>
+                        <div class="aCron">
+                            <span class="aNow"></span> / <span class="aTime"></span>
+                        </div>
+                        <div id="bWrap">
+                            <button class="button" id="aPlay" disabled><span class="aPlayIco">
+                                    <p class="fa fa-play">Listen</p>
+                                </span></button>
+                            <div class="volume-container">
+                                <span class="aVolIco"><i class="fa fa-volume-up"></i></span>
+                                <div class="range-volume">
+                                    <span class="under-ranger"></span>
+                                    <input class="aVolume" type="range" min="0" max="1" value="1" step="0.1"
+                                        disabled><span class="change-range"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            SHEET MUSIC INSERT HERE
+
+            <p>Sometimes I’ll glance at the sheet music, even though I can’t read it; I can <a class="clue-text"
+                    href="https://blogs.ubc.ca/etec530final/course-content/notes-and-rests/" target="_blank">tell
+                    the difference between a half note and a quarter note</a>, sure, but I couldn’t discern pitches if
+                my life depended on it. Luckily, that’s not important here.</p>
+            <p>I’ve reminisced for long enough.
+                <!-- <a class="egg" href="../ch0/lettuce.html">Music can provide a fun
+                    reprieve at times</a>, but you  -->
+                You have <a class="clue-text" href="https://fr.wikipedia.org/wiki/Code_Morse_international"
+                    target="_blank">mor
+                    se</a>crets to
+                de<a class="clue-text" href="https://fr.wikipedia.org/wiki/Code_Morse_international"
+                    target="_blank">code</a> —you’d better get to it.
+            </p>
+        </div>
+        <a href="" target="_blank"><img src=""></a>
+        <div id="hint-parent" class="basic-padding">
+            <a id="hint1" class="button basic-padding">help</a>
+            <!-- <a id="hint2" class="button basic-padding">help</a> -->
+            <!-- <a id="hint3" class="button basic-padding">help</a> -->
+        </div>
+        <!-- <div id="clue2" class="basic-padding marginal-margin hidden">
+           
+        </div> -->
+        </div>
+    </main>
+    <div id="header-container"></div>
+</body>
+
+<script>
+    // Coded by: https://mmzand.ir
+    // Credit: https://code-boxx.com/html-custom-audio-player/#sec-audio
+    // (A) SUPPORT FUNCTION - FORMAT HH:MM:SS
+    var timeString = (secs) => {
+        // (A1) HOURS, MINUTES, SECONDS
+        let ss = Math.floor(secs),
+            hh = Math.floor(ss / 3600),
+            mm = Math.floor((ss - hh * 3600) / 60);
+        ss = ss - hh * 3600 - mm * 60;
+
+        // (A2) RETURN FORMATTED TIME
+        if (hh > 0) {
+            mm = mm < 10 ? "0" + mm : mm;
+        }
+        ss = ss < 10 ? "0" + ss : ss;
+        return hh > 0 ? `${hh}:${mm}:${ss}` : `${mm}:${ss}`;
+    };
+
+    function setProgress(elTarget) {
+        let divisionNumber = elTarget.getAttribute("max") / 100;
+        let rangeNewWidth = Math.floor(elTarget.value / divisionNumber);
+        if (rangeNewWidth > 95) {
+            elTarget.nextSibling.style.width = "95%";
+        } else {
+            elTarget.nextSibling.style.width = rangeNewWidth + "%";
+        }
+    }
+
+    for (let i of document.querySelectorAll(".aWrap")) {
+        // (B) AUDIO + HTML SETUP + FLAGS
+        i.audio = new Audio('../audio/what-are-we.wav');
+        (i.aPlay = document.getElementById("aPlay")),
+            (i.aPlayIco = i.querySelector(".aPlayIco")),
+            (i.aNow = i.querySelector(".aNow")),
+            (i.aTime = i.querySelector(".aTime")),
+            (i.aSeek = i.querySelector(".aSeek")),
+            (i.aVolume = i.querySelector(".aVolume")),
+            (i.aVolIco = i.querySelector(".aVolIco"));
+        i.seeking = false; // user is dragging the seek bar
+
+        // (C) PLAY & PAUSE
+        // (C1) CLICK TO PLAY/PAUSE
+        i.aPlay.onclick = () => {
+            if (i.audio.paused) {
+                i.audio.play();
+            } else {
+                i.audio.pause();
+            }
+        };
+
+        // (C2) SET PLAY/PAUSE ICON
+        i.audio.onplay = () => (i.aPlayIco.innerHTML = '<p class="fa fa-pause">Pause</p>');
+        i.audio.onpause = () => (i.aPlayIco.innerHTML = '<p class="fa fa-play">Play</p>');
+
+        // (D) TRACK PROGRESS & SEEK TIME
+        // (D1) TRACK LOADING
+        i.audio.onloadstart = () => {
+            i.aNow.innerHTML = "Loading";
+            i.aTime.innerHTML = "";
+        };
+
+        // (D2) ON META LOADED
+        i.audio.onloadedmetadata = () => {
+            // (D2-1) INIT SET TRACK TIME
+            i.aNow.innerHTML = timeString(0);
+            i.aTime.innerHTML = timeString(i.audio.duration);
+
+            // (D2-2) SET SEEK BAR MAX TIME
+            i.aSeek.max = Math.floor(i.audio.duration);
+
+            // (D2-3) USER CHANGE SEEK BAR TIME
+            i.aSeek.oninput = () => (i.seeking = true); // prevents clash with (d2-4)
+            i.aSeek.onchange = () => {
+                i.audio.currentTime = i.aSeek.value;
+                if (!i.audio.paused) {
+                    i.audio.play();
+                }
+                i.seeking = false;
+            };
+
+            // (D2-4) UPDATE SEEK BAR ON PLAYING
+            i.audio.ontimeupdate = () => {
+                if (!i.seeking) {
+                    i.aSeek.value = Math.floor(i.audio.currentTime);
+                }
+                i.aNow.innerHTML = timeString(i.audio.currentTime);
+                let divisionNumber = i.aSeek.getAttribute("max") / 100;
+                let rangeNewWidth = Math.floor(i.aSeek.value / divisionNumber);
+                if (rangeNewWidth > 95) {
+                    i.aSeek.nextSibling.style.width = "95%";
+                } else {
+                    i.aSeek.nextSibling.style.width = rangeNewWidth + "%";
+                }
+            };
+        };
+
+        // (E) VOLUME
+        i.aVolIco.onclick = () => {
+            i.audio.volume = i.audio.volume == 0 ? 1 : 0;
+            i.aVolume.value = i.audio.volume;
+            i.aVolIco.innerHTML =
+                i.aVolume.value == 0
+                    ? '<i class="fa fa-volume-off"></i>'
+                    : '<i class="fa fa-volume-up"></i>';
+            if (i.aVolume.value == 0) {
+                i.aVolume.nextSibling.style.width = "0%";
+            } else {
+                i.aVolume.nextSibling.style.width = "95%";
+            }
+        };
+        i.aVolume.onchange = () => {
+            i.audio.volume = i.aVolume.value;
+            i.aVolIco.innerHTML =
+                i.aVolume.value == 0
+                    ? '<i class="fa fa-volume-off"></i>'
+                    : '<i class="fa fa-volume-up"></i>';
+        };
+
+        // (F) ENABLE/DISABLE CONTROLS
+        i.audio.oncanplaythrough = () => {
+            i.aPlay.disabled = false;
+            i.aVolume.disabled = false;
+            i.aSeek.disabled = false;
+        };
+        i.audio.onwaiting = () => {
+            i.aPlay.disabled = true;
+            i.aVolume.disabled = true;
+            i.aSeek.disabled = true;
+        };
+
+        i.aSeek.addEventListener("input", function () {
+            setProgress(this);
+        });
+
+        i.aVolume.addEventListener("input", function () {
+            setProgress(this);
+        });
+    }
+</script>
+
+</html>
