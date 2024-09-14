@@ -89,14 +89,11 @@
         <div class="image-container">
             <img id="hall" src="../images/socratic2.png"
                 alt="A black and white photograph inside the 6th floor of UHall. The building is completely empty.">
-            <div id="progress-patch" onclick="window.location.href='below.html'"></div>
+            <div id="progress-patch" onclick="window.location.href='4-words.html'"></div>
             <div id="hold-words1">
                 <p class="hold-words" style=" top:0; left: 0; rotate:351deg;"></p>
                 <p class="hold-words" style=" left: 70px; rotate:353deg;">Keep going.</p>
             </div>
-            <!-- <div id="hold-words2">
-                <p>(I wish we still used the platonic couches.)</p>
-            </div> -->
         </div>
     </main>
 </body>
@@ -110,7 +107,7 @@
         const hold2 = document.getElementById('hold-words2');
         const svgElement = document.querySelector('svg');
 
-        const adjustPositions = () => { 
+        const adjustPositions = () => {
             const picHeight = pic.offsetHeight;
             const picWidth = pic.offsetWidth;
 
@@ -129,4 +126,5 @@
         window.addEventListener('resize', adjustPositions);
     });
 </script>
+
 </html>

@@ -10,19 +10,14 @@
     <script src="../js/scripts.js"></script>
 </head>
 
-<body data-group-id="continue" data-page-id="two">
-    <!-- <header id="main-header">
-        <ul>
-            <li id="about" class="basic-padding">About</li>
-            <li id="help" class="basic-padding">Trouble</li>
-            <li id="progress" class="basic-padding">Progress</li>
-        </ul>
-    </header> -->
-    <main class="thick-padding containment right-container">
-        <!-- <h1>Architect</h1> -->
-        <!-- <p> Earth slides down the coulee like teardrops down a face.</p> -->
+<body data-group-id="continue" data-page-id="rocks1">
+    <main class="thick-padding right-container">
+        <p>Pebbles stumble down the slope. </p>
+        <p>Can you trust the earth below you? How strong is your foundation? </p>
+        <div class="basic-padding marginal-margin">
+            <div id="reorient" class="button basic-padding">return to the origins</div>
+        </div>
     </main>
-
     <div class="falling-container"></div>
 </body>
 
@@ -59,33 +54,36 @@
             container.appendChild(sand);
         }
 
-        const totalRocks = 4;
+        const totalRocks = 2;
 
         // Create rocks and sand particles
         for (let i = 0; i < totalRocks; i++) {
-            const rockSize = Math.random() * 40 + 10; // Random size between 10px and 40px
-            const rockDuration = Math.random() * 0.5 + 0.5; // Faster duration between 3s and 5s
-            const rockDelay = Math.random() * 3; // Random delay between 0s and 0.5s
+            const rockSize = Math.random() * 30 + 10; // Random size between 10px and 30px
+            const rockDuration = Math.random() * 0.5 + 0.5;
+            const rockDelay = Math.random() * 0.5; // Random delay between 0s and 0.5s
             const rockLeft = Math.random() * 100; // Random horizontal position between 0% and 100%
 
             // Determine which border-radius set to use based on the rock's index
             const borderRadiusSet = borderRadiusSets[Math.floor(i / (totalRocks / 3))];
 
-            // Create the rock with the selected border-radius
             createRock(rockSize, rockDuration, rockDelay, rockLeft, borderRadiusSet);
 
-            // Create sand particles 
+            // Create sand particles for each rock, with a duration of approximately 0.5 seconds
             for (let j = 0; j < 15; j++) {
-                const sandDuration = Math.random() * 0.5 + 0;
-                const sandDelay = Math.random() * 5; // Increased delay range for more staggering (0s to 1.5s)
-                const sandLeft = rockLeft + Math.random() * 10 - 5;
+                const sandDuration = Math.random() * 0.5; // Duration around 0.5 seconds
+                const sandDelay = Math.random() * 1.5; // Increased delay range for more staggering (0s to 1.5s)
+                const sandLeft = rockLeft + Math.random() * 10 - 5; // Slightly random position around the rock
 
                 createSand(sandDuration, sandDelay, sandLeft);
             }
         }
+
+        document.getElementById("reorient").addEventListener("click", function () {
+            setTimeout(function () {
+                window.location.href = "../beginning/origins.html";
+            }, 700);
+        });
     });
-
-
 </script>
 
 </html>

@@ -10,29 +10,12 @@
     <script src="../js/scripts.js"></script>
 </head>
 
-<body data-group-id="continue" data-page-id="four">
-    <!-- <header id="main-header">
-        <ul>
-            <li id="about" class="basic-padding">About</li>
-            <li id="help" class="basic-padding">Trouble</li>
-            <li id="progress" class="basic-padding">Progress</li>
-        </ul>
-    </header> -->
+<body data-group-id="continue" data-page-id="rocks3">
     <main class="thick-padding right-container">
-        <h1>Moment of Darkness</h1>
-        <p> Surprise steals my breath like a chinook. I look at us and wonder, Are we worth saving?</p>
-        <p class="tangent">(I think we’ve become just like the rest of them.)
-        </p>
-        <p>We let there be light, but it’s just a dull fluorescent beam. The eyes ache to look at it. I keep asking
-            myself, Do we care for each other? Are we a community? </p>
-        <p class="tangent">(I feel a little sick.)</p>
-        <p>Our institution's first president, W.A.S. Smith, once said: "I suppose that because I've been treated
-            well by it, I want there to be a reason for the university's continued existence" (p.15).
-            I've been searching for that reason. I've been struggling to explain myself. I don't know. I don't know.</p>
-        <div class="center-container basic-padding marginal-margin">
-            <div id="continue" class="button basic-padding">continue</div>
+        <p>The hillside feels empty inside. It's uncomfortable, living with a cavity. </p>
+        <div class="basic-padding marginal-margin">
+            <div id="reorient" class="button basic-padding">return to the origins</div>
         </div>
-
     </main>
 
     <div class="falling-container"></div>
@@ -71,12 +54,12 @@
             container.appendChild(sand);
         }
 
-        const totalRocks = 12;
+        const totalRocks = 7;
 
         // Create rocks and sand particles
         for (let i = 0; i < totalRocks; i++) {
-            const rockSize = Math.random() * 100 + 20; // Random size between 20px and 100px
-            const rockDuration = Math.random() * 0.25 + 0.35; // Faster duration between 3s and 5s
+            const rockSize = Math.random() * 40 + 20; // Random size between 20px and 70px
+            const rockDuration = Math.random() * 0.5 + 0.5; // Faster duration between 3s and 5s
             const rockDelay = Math.random() * 3; // Random delay between 0s and 0.5s
             const rockLeft = Math.random() * 100; // Random horizontal position between 0% and 100%
 
@@ -87,7 +70,7 @@
             createRock(rockSize, rockDuration, rockDelay, rockLeft, borderRadiusSet);
 
             // Create sand particles 
-            for (let j = 0; j < 30; j++) {
+            for (let j = 0; j < 15; j++) {
                 const sandDuration = Math.random() * 0.5 + 0;
                 const sandDelay = Math.random() * 5; // Increased delay range for more staggering (0s to 1.5s)
                 const sandLeft = rockLeft + Math.random() * 10 - 5;
@@ -95,10 +78,11 @@
                 createSand(sandDuration, sandDelay, sandLeft);
             }
         }
-    });
-
-    document.getElementById("continue").addEventListener("click", function () {
-        window.location.href = "../beginning/origins.html";
+        document.getElementById("reorient").addEventListener("click", function () {
+            setTimeout(function () {
+                window.location.href = "../beginning/origins.html";
+            }, 700);
+        });
     });
 </script>
 

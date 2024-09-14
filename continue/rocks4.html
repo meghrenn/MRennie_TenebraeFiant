@@ -10,17 +10,12 @@
     <script src="../js/scripts.js"></script>
 </head>
 
-<body data-group-id="continue" data-page-id="five">
-    <!-- <header id="main-header">
-        <ul>
-            <li id="about" class="basic-padding">About</li>
-            <li id="help" class="basic-padding">Trouble</li>
-            <li id="progress" class="basic-padding">Progress</li>
-        </ul>
-    </header> -->
-    <main class="thick-padding containment right-container">
-        <!-- <h1>Architect</h1> -->
-
+<body data-group-id="continue" data-page-id="rocks4">
+    <main class="thick-padding right-container">
+        <p>The end is nigh. Will you face it? You are nothing more than a sunflower turning towards a supernova.</p>
+        <div class="basic-padding marginal-margin">
+            <div id="reorient" class="button basic-padding">return to the origins</div>
+        </div>
     </main>
 
     <div class="falling-container"></div>
@@ -29,7 +24,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const container = document.querySelector('.falling-container');
-        const body = document.body;
 
         const borderRadiusSet1 = '15% 40px 25% 5em / 30px 50% 20px 2em';
         const borderRadiusSet2 = '15px 5px 30% 2em / 30% 20% 2px 4em';
@@ -60,12 +54,12 @@
             container.appendChild(sand);
         }
 
-        const totalRocks = 30;
+        const totalRocks = 12;
 
         // Create rocks and sand particles
         for (let i = 0; i < totalRocks; i++) {
-            const rockSize = Math.random() * 100 + 20; // Random size between 20px and 70px
-            const rockDuration = Math.random() * 0.5 + 0.5; // Faster duration between 3s and 5s
+            const rockSize = Math.random() * 100 + 20; // Random size between 20px and 100px
+            const rockDuration = Math.random() * 0.25 + 0.35; // Faster duration between 3s and 5s
             const rockDelay = Math.random() * 3; // Random delay between 0s and 0.5s
             const rockLeft = Math.random() * 100; // Random horizontal position between 0% and 100%
 
@@ -84,6 +78,12 @@
                 createSand(sandDuration, sandDelay, sandLeft);
             }
         }
+
+        document.getElementById("reorient").addEventListener("click", function () {
+            setTimeout(function () {
+                window.location.href = "../beginning/origins.html";
+            }, 700);
+        });
     });
 </script>
 

@@ -22,6 +22,10 @@
         background-color: #e0cda9;
     }
 
+    main {
+        margin: auto auto auto auto;
+    }
+
     .falling-container {
         position: fixed;
         width: 100%;
