@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <img id="unearth" src="../images/what-are-we.jpg">
+            <img class="basic-padding" src="../images/what-are-we.jpg">
 
             <p>Sometimes I’ll glance at the sheet music, even though I can’t read it; I can <a class="clue-text"
                     href="https://blogs.ubc.ca/etec530final/course-content/notes-and-rests/" target="_blank">tell
@@ -71,17 +71,15 @@
                     target="_blank">code</a> —you’d better get to it.
             </p>
         </div>
-        <a href="" target="_blank"><img src=""></a>
-        <div id="hint-parent" class="basic-padding">
-            <a id="hint1" class="button basic-padding">help</a>
-            <!-- <a id="hint2" class="button basic-padding">help</a> -->
-            <!-- <a id="hint3" class="button basic-padding">help</a> -->
-        </div>
-        <!-- <div id="clue2" class="basic-padding marginal-margin hidden">
-        </div> -->
-        </div>
-    </main>
-    <div id="header-container"></div>
+        <form class="right-container" id="my-form">
+            <label for="file-pass" class="marginal-margin">Enter Password:</label>
+            <div class="marginal-margin">
+                <input type="text" style="color:rgb(0, 0, 0);" class="basic-padding" id="file-pass"
+                    placeholder="what are we?" required>
+            </div>
+            <input class="button basic-padding marginal-margin" type="submit">
+        </form>
+        <div id="header-container"></div>
 </body>
 
 <script>

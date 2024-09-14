@@ -328,9 +328,11 @@ document.addEventListener('DOMContentLoaded', function () {
     "architect": "collapse",
     "future": "congrats",
     "goodbye": "piano",
+    "piano": "../monster/fear.html",
     "collapse": "../begin/origins",
     "explanation": "../begin/initiation",
     "secret-stairs": "logo",
+    "hayes-and-march": "doubt",
     "encroaching-end": "aperture",
     "aperture": "the-end",
   };
@@ -342,6 +344,8 @@ document.addEventListener('DOMContentLoaded', function () {
     "future": "2267",
     "lettuce": "200",
     "goodbye": "piano",
+    "piano": "frightened",
+    "hayes-and-march": "doubt",
     "secret-stairs": "coy",
     "encroaching-end": "aperture",
   };
