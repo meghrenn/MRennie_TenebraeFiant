@@ -262,6 +262,7 @@ header ul li {
 #progress-page,
 #egg-page {
     background-color: var(--lightest);
+    z-index: 9998;
 }
 
 #about:hover,
