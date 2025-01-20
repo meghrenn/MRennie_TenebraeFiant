@@ -226,6 +226,7 @@ header ul li {
     height: 100vh;
     width: 1vw;
     margin: 50px auto auto auto;
+    z-index: 9998;
 }
 
 
