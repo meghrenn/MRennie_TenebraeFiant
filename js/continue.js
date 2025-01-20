@@ -38,8 +38,6 @@
 
 
 
-
-
 // document.addEventListener('DOMContentLoaded', function () {
 //     // var continuePage = {
 //     //     "level": "cont-architect",
