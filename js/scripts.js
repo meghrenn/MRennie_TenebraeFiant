@@ -111,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
   function createProgressList() {
     // Retrieve the 'gameProgress' from local storage and parse it as JSON
     var gameProgress = JSON.parse(localStorage.getItem('gameProgress'));
-    console.log(gameProgress);
 
     // If 'gameProgress' doesn't exist or is not an array, initialize a new array with the index page
     if (!Array.isArray(gameProgress)) {
@@ -254,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-  localStorage.removeItem('gameProgress');
+  // localStorage.removeItem('gameProgress');
   // reset progress^
 
   //tracking user progress and checking passwords
