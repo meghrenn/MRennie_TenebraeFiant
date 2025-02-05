@@ -97,8 +97,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (localStorage.getItem(pageKey) !== 'true') {
             // Increment continueProgress
             let continueProgress = parseInt(localStorage.getItem('continueProgress'));
-            continueProgress++;
-            localStorage.setItem('continueProgress', continueProgress);
+            if (continueProgress < 5) {
+                continueProgress++;
+                localStorage.setItem('continueProgress', continueProgress);
+            }
 
             // Mark this page as clicked
             localStorage.setItem(pageKey, 'true');
