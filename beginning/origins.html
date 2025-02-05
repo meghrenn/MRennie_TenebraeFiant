@@ -49,19 +49,16 @@
         transition: opacity 0s ease-in;
     }
 
+    /* 
     #origin-text {
         transition: opacity 0.5s ease;
-        /* opacity: 0; */
+     
     }
 
     #origin-text>* {
         transition: opacity 1s ease;
         z-index: 1000;
         position: relative;
-    }
-
-    /* #origin-text.visible {
-        opacity: 1;
     } */
 </style>
 
@@ -76,7 +73,7 @@
     <div id="hist-hold">
         <div id="origin-text" class="thick-padding containment">
             <h1>Origins</h1>
-            <p class>I can feel another vision coming on. No—not one vision, but many: A whirlwind of imagery, a twister
+            <p class>I can feel another vision coming on. No—not one vision, but many: a whirlwind of imagery, a twister
                 of historical particulate.</p>
             <p>They feel like memories, real scenes that played out. How far back can I see?
                 How deep does this go?</p>
@@ -91,9 +88,6 @@
         <img id="construction" class="avail" src="../images/origins/1971.png">
         <img id="unearthed" class="locked" src="../images/meliorist/unearthed-photograph.jpg">
         <img id="tale" class="locked" src="../images/students1.png">
-
-        <!-- WE WOULD IF WE COULD -->
-
         <img id="worm" class="avail" src="../images/origins/worm3.png">
     </div>
     <div id="dark-overlay"></div>
@@ -119,11 +113,14 @@
             }
         }
 
-        document.getElementById("worm").addEventListener("click", function (event) {
-            handleClick(event, "../tunnel/worm.html");
+        document.getElementById("above").addEventListener("click", function (event) {
+            handleClick(event, "../place/above.html");
         });
         document.getElementById("fog").addEventListener("click", function (event) {
             handleClick(event, "../architect/fog.html");
+        });
+        document.getElementById("controversy").addEventListener("click", function (event) {
+            handleClick(event, "../place/controversy.html");
         });
         // document.getElementById("strike1").addEventListener("click", function (event) {
         //     handleClick(event, "../strike/2022.html");
@@ -134,26 +131,26 @@
         document.getElementById("ameliorate").addEventListener("click", function (event) {
             handleClick(event, "../meliorist/ameliorate.html");
         });
-        document.getElementById("logo").addEventListener("click", function (event) {
-            handleClick(event, "../monster/logo.html");
-        });
-        document.getElementById("tale").addEventListener("click", function (event) {
-            handleClick(event, "../tale/goodbye.html");
+        // document.getElementById("logo").addEventListener("click", function (event) {
+        //     handleClick(event, "../monster/logo.html");
+        // });
+        document.getElementById("puzzle").addEventListener("click", function (event) {
+            handleClick(event, "../puzzling/puzzle.html");
         });
         document.getElementById("west").addEventListener("click", function (event) {
             handleClick(event, "../place/west.html");
         });
-        document.getElementById("above").addEventListener("click", function (event) {
-            handleClick(event, "../place/above.html");
-        });
-        document.getElementById("puzzle").addEventListener("click", function (event) {
-            handleClick(event, "../puzzling/puzzle.html");
+        document.getElementById("construction").addEventListener("click", function (event) {
+            handleClick(event, "../puzzling/construction.html");
         });
         document.getElementById("unearthed").addEventListener("click", function (event) {
             handleClick(event, "../meliorist/unearthed.html");
         });
-        document.getElementById("construction").addEventListener("click", function (event) {
-            handleClick(event, "../puzzling/construction.html");
+        document.getElementById("tale").addEventListener("click", function (event) {
+            handleClick(event, "../tale/goodbye.html");
+        });
+        document.getElementById("worm").addEventListener("click", function (event) {
+            handleClick(event, "../tunnel/worm.html");
         });
     };
 
@@ -265,7 +262,6 @@
             document.getElementById('tale').classList.add('locked');
             document.getElementById('tale').classList.remove('avail');
         }
-
 
 
         window.addEventListener('scroll', function () {

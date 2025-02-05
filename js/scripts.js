@@ -164,31 +164,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-
-  // //Track player's use of hints
-  // localStorage.removeItem('hintUse');
-  // // reset progress
-  // document.addEventListener("DOMContentLoaded", function () {
-
-  //   if (document.getElementById("hint-parent") !== null || document.body.getAttribute("data-page-id") === "initiation") {
-
-  //     var hintUse = JSON.parse(localStorage.getItem('hintUse')) || [];
-  //     var currentPage = document.body.getAttribute("data-page-id");
-
-
-  //     function noteHintUse(elementId) {
-  //       // Get the existing hintUse array from localStorage or initialize it if it doesn't exist
-
-  //       // Push the data of the clicked element and currentPage to the hintUse array
-  //       hintUse.push({ elementId: elementId, currentPage: currentPage });
-
-  //       // Update the hintUse array in localStorage
-  //       localStorage.setItem('hintUse', JSON.stringify(hintUse));
-  //     }
-
-
   var hint1 = document.getElementById("hint1");
   var hint2 = document.getElementById("hint2");
   var hint3 = document.getElementById("hint3");
@@ -201,7 +176,6 @@ document.addEventListener('DOMContentLoaded', function () {
         clue.classList.add("bold");
       });
       hint1.classList.add("helpful");
-      // noteHintUse("hint1");
     });
   }
 
@@ -212,7 +186,6 @@ document.addEventListener('DOMContentLoaded', function () {
         clue2.classList.remove("hidden");
       }
       hint2.classList.add("helpful");
-      // noteHintUse("hint2")
       // Smoothly scroll to the bottom of the page
       window.scrollTo({
         top: document.body.scrollHeight,
@@ -228,7 +201,6 @@ document.addEventListener('DOMContentLoaded', function () {
         clue3.classList.remove("hidden");
       }
       hint3.classList.add("helpful");
-      // noteHintUse("hint3");
       // Smoothly scroll to the bottom of the page
       window.scrollTo({
         top: document.body.scrollHeight,
@@ -236,21 +208,6 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
-
-
-
-
-
-  // // Update hintUse in localStorage before leaving the page
-  // window.addEventListener('beforeunload', function () {
-  //   if (document.getElementById("hint-parent") !== null) {
-  //     // Update the hintUse array in localStorage
-  //     localStorage.setItem('hintUse', JSON.stringify(hintUse));
-  //   }
-  // });
-
-
-
 
 
   // localStorage.removeItem('gameProgress');
