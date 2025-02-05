@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-  // localStorage.removeItem('gameProgress');
+  localStorage.removeItem('gameProgress');
   // reset progress^
 
   //tracking user progress and checking passwords
@@ -321,39 +321,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //Check passwords
   var pageNextStep = {
+    "explanation": "../begin/initiation",
     "initiation": "luck",
     "head": "origins",
     "tail": "origins",
     "fog": "architect",
     "architect": "collapse",
-    "future": "congrats",
-    "goodbye": "doubt",
-    "piano": "../monster/fear.html",
     "collapse": "../begin/origins",
-    "explanation": "../begin/initiation",
-    "secret-stairs": "logo",
-    // "hayes-and-march": "doubt",
+    "goodbye": "doubt",
+    "coy-site": "",
     "encroaching-end": "aperture",
     "aperture": "the-end",
+
+    // "hayes-and-march": "doubt",
+    "future": "congrats",
+
   };
   var correctNextStep = pageNextStep[currentPage];
 
   var pagePasswords = {
     "initiation": "l",
     "architect": "river",
-    "future": "2267",
-    "lettuce": "200",
     "goodbye": "doubt",
-    "piano": "frightened",
-    // "hayes-and-march": "doubt",
-    "secret-stairs": "coy",
+    "coy-site": "yeuleth",
     "encroaching-end": "aperture",
+
+    "future": "2267",
   };
   var correctPassword = pagePasswords[currentPage];
 
   var pageAlerts = {
     "initiation": "Not what I was looking for. Looks like you're still learning how to play, eh?",
     "architect": "That's not right. Don't put words in my mouth that I haven't asked for.",
+    "goodbye": "I'm not sure about that. Try again.",
+    "coy-site": "No, no, that can't be right....",
     "encroaching-end": "i Am PrEtty suRe thaT yoU'RE wrong. try again",
   }
   var correctAlert = pageAlerts[currentPage];

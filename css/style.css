@@ -389,12 +389,15 @@ a.egg {
 
 }
 
+.tangent,
+.tangent>*,
 #eldritch-speak,
 .eldritch-speak,
 .eldritch-speak>* {
     font-family: 'Vinque', Georgia, serif;
     color: white;
     /* font-size: 10vw; */
+
 }
 
 #eldritch-speak {
@@ -403,13 +406,10 @@ a.egg {
     z-index: 6;
 }
 
-.tangent,
-.tangent>* {
+/* {
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
-    color: white;
-    /* font-size: 5vw; */
-}
+    color: white; */
 
 
 
