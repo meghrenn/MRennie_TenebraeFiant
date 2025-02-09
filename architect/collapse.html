@@ -67,8 +67,9 @@
         </div>
 
         <div class="thick-padding right-container history2">
+            <p>TRANSCRIPT:</p>
             <p>
-                JT: You know the University sliding into the [Oldman] river was one of the great myths that you
+                JT: You know the University sliding into the river was one of the great myths that you
                 always
                 heard in the early years here.</p>
             <p>BC: Well certainly!</p>
@@ -77,11 +78,10 @@
             <p>BC: That's right, and—</p>
             <p>JT: You probably got quite sick and tired of hearing that.</p>
             <p>BC: Well, you heard it everywhere you went, even around the city. How it’s going to slide into the
-                river.
-                Well, yes, it was a hard thing to convince people that it wouldn’t.</p>
-            <p>...</p>
-            <p>BC: And even in 1990 when you went out anywhere everybody was saying, 'Well gee, it’s not going to
-                slip and slide into the river?' You always had to be on the defensive.</p>
+                river, and... yeah, it was a hard thing to convince people that it wouldn’t.</p>
+            <p>[Static, transitioning to a new audio clip]</p>
+            <p>BC: And of course anytime you went out anywhere, everybody was saying, 'Well gee, it’s not going to
+                slip and slide into the river?' You always had to be on the defensive. [Laughter]</p>
             <p>(Tagg, 2009)</p>
         </div>
         <div class="basic-padding">
@@ -102,7 +102,7 @@
 <script>
 
     document.getElementById("collapse-form").addEventListener("submit", function (event) {
-        event.preventDefault(); 
+        event.preventDefault();
         var enteredPassword = document.getElementById("file-pass").value;
         console.log(enteredPassword);
         if (enteredPassword === "will") {
@@ -112,7 +112,7 @@
             setTimeout(function () {
                 document.body.style.backgroundColor = '';
                 document.getElementById("main-header").style.backgroundColor = '';
-                             window.location.href = "../architect/level.html";
+                window.location.href = "../architect/level.html";
             }, 700);
         } else if (enteredPassword === "will-not") {
             puzzleSolved = true;
@@ -165,7 +165,7 @@
 
     for (let i of document.querySelectorAll(".aWrap")) {
         // (B) AUDIO + HTML SETUP + FLAGS
-        i.audio = new Audio('../audio/fall-no.mp3');
+        i.audio = new Audio('../audio/bc-interview.mp3');
         (i.aPlay = document.getElementById("aPlay")),
             (i.aPlayIco = i.querySelector(".aPlayIco")),
             (i.aNow = i.querySelector(".aNow")),
@@ -274,4 +274,5 @@
         });
     }
 </script>
+
 </html>

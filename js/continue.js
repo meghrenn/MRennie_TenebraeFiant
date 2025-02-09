@@ -77,6 +77,8 @@
 //     });
 // });
 
+  localStorage.removeItem('continueProgress');
+
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize continueProgress in localStorage if it doesn't exist
     if (localStorage.getItem('continueProgress') === null) {

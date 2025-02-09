@@ -4,10 +4,12 @@ click1, click2: vovere https://freesound.org/s/388457/
 click-tear: Breviceps https://freesound.org/s/445972/
 sweep: MattRuthSound https://freesound.org/s/561607/ 
 dirt 1-5: SpliceSound https://freesound.org/s/260130/ 
+static (in the Collapse page audio): dotY21 https://freesound.org/s/335205/
 
 roll-in, roll-out: davidkyoku https://freesound.org/s/156614/ NOT IN USE CURRENTLY
 
-https://www.ulethbridge.ca/50-voices/content/bob NEED PERMISSION, PROPER CITATION
+
+interview (from the Collapse page audio): https://www.ulethbridge.ca/50-voices/content/bob 
 
 
 TYPEFACES
@@ -27,4 +29,4 @@ Character by Xavier Brooks
 
 IMAGES
 Brown paper background image by andreas160578 on Pixabay https://pixabay.com/users/andreas160578-2383079/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1332019 
-
+Archival photographs of campus from the University of Lethbridge Library Digital Collections

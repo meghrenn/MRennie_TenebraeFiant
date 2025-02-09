@@ -70,13 +70,6 @@
 </style>
 
 <body data-group-id="monster" data-page-id="logo">
-    <!-- <header id="main-header">
-        <ul>
-            <li id="about" class="basic-padding">About</li>
-            <li id="help" class="basic-padding">Trouble</li>
-            <li id="progress" class="basic-padding">Progress</li>
-        </ul>
-    </header> -->
     <main class="thick-padding containment">
         <!-- <p>
             "With recent discussions on motto and insignia in mind, a disillusioned professor suggested black and blue
@@ -87,7 +80,6 @@
         <p id="eldritch-speak"></p>
         <div id="overlay"></div>
     </main>
-    <!-- <div id="header-container"></div> -->
 </body>
 <script>
     function fadeImages() {
@@ -99,15 +91,15 @@
     setTimeout(fadeImages, 67000);
 
     setTimeout(() => {
-             const sentences = [
-            'kill the light',
-            'set the sun',
-            'welcome night',
-            'come undone',
+        const sentences = [
+            'kill every light',
+            'let set the sun',
+            'welcome the night',
+            'then come undone',
             'cave to the call',
             'bow to the beast',
             'uhall must fall',
-            'yeuleth must feast',
+            'YEULETH must feast',
             '₮Ɇ₦Ɇ฿Ɽ₳Ɇ ₣ł₳₦₮'
         ];
 
@@ -119,7 +111,6 @@
             function typeCharacter() {
                 element.textContent = sentences[sentenceIndex].substring(0, charIndex);
                 charIndex++;
-
 
                 // Check if all letters in the current sentence are typed
                 if (charIndex > sentences[sentenceIndex].length) {
@@ -161,4 +152,5 @@
     }, 71000);
 
 </script>
+
 </html>

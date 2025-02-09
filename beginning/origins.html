@@ -48,18 +48,6 @@
         opacity: 1;
         transition: opacity 0s ease-in;
     }
-
-    /* 
-    #origin-text {
-        transition: opacity 0.5s ease;
-     
-    }
-
-    #origin-text>* {
-        transition: opacity 1s ease;
-        z-index: 1000;
-        position: relative;
-    } */
 </style>
 
 <body id="hist-grid" data-group-id="beginning" data-page-id="origins">
@@ -73,20 +61,19 @@
     <div id="hist-hold">
         <div id="origin-text" class="thick-padding containment">
             <h1>Origins</h1>
-            <p class>I can feel another vision coming on. No—not one vision, but many: a whirlwind of imagery, a twister
-                of historical particulate.</p>
-            <p>They feel like memories, real scenes that played out. How far back can I see?
+            <p class>I can feel another vision coming on. Wait, no—it's multiple visions: a whirlwind of imagery, a
+                twister of historical particulate. They feel like memories, real scenes that played out.</p>
+            <p> How far back can I see?
                 How deep does this go?</p>
         </div>
         <img id="above" class="locked" src="../images/overhead/1956.jpg">
         <img id="fog" class="avail" src="../images/origins/bldg-plan1.png">
         <img id="controversy" class="locked" src="../images/origins/protest1.png">
-        <img id="ameliorate" class="avail" src="../images/meliorist/first-edition.jpg">
+        <!-- <img id="ameliorate" class="avail" src="../images/meliorist/first-edition.jpg"> -->
         <img id="puzzle" class="locked" src="../images/bug/vw-bug1.png">
         <img id="west" class="avail" src="../images/origins/bldg1.png">
-        <!-- <img id="logo" class="locked" src="../images/coat-of-arms.jpg"> -->
         <img id="construction" class="avail" src="../images/origins/1971.png">
-        <img id="unearthed" class="locked" src="../images/meliorist/unearthed-photograph.jpg">
+        <!-- <img id="unearthed" class="locked" src="../images/meliorist/unearthed-photograph.jpg"> -->
         <img id="tale" class="locked" src="../images/students1.png">
         <img id="worm" class="avail" src="../images/origins/worm3.png">
     </div>
@@ -128,9 +115,9 @@
         // document.getElementById("strike2").addEventListener("click", function (event) {
         //     handleClick(event, "../strike/2022.html");
         // });
-        document.getElementById("ameliorate").addEventListener("click", function (event) {
-            handleClick(event, "../meliorist/ameliorate.html");
-        });
+        // document.getElementById("ameliorate").addEventListener("click", function (event) {
+        //     handleClick(event, "../meliorist/ameliorate.html");
+        // });
         // document.getElementById("logo").addEventListener("click", function (event) {
         //     handleClick(event, "../monster/logo.html");
         // });
@@ -143,9 +130,9 @@
         document.getElementById("construction").addEventListener("click", function (event) {
             handleClick(event, "../puzzling/construction.html");
         });
-        document.getElementById("unearthed").addEventListener("click", function (event) {
-            handleClick(event, "../meliorist/unearthed.html");
-        });
+        // document.getElementById("unearthed").addEventListener("click", function (event) {
+        //     handleClick(event, "../meliorist/unearthed.html");
+        // });
         document.getElementById("tale").addEventListener("click", function (event) {
             handleClick(event, "../tale/goodbye.html");
         });
@@ -175,83 +162,6 @@
                 child.classList.remove('avail');
             }
         });
-
-        //     // Initialize continueProgress in localStorage if it doesn't exist
-        //     if (localStorage.getItem('continueProgress') === null) {
-        //         localStorage.setItem('continueProgress', '1');
-        //     }
-
-        //     // Retrieve continueProgress value from localStorage
-        //     let continueProgress = parseInt(localStorage.getItem('continueProgress'));
-
-        //     if (continueProgress > 4) {
-        //         document.getElementById('origin-text').style.opacity = '0';
-        //         document.getElementById('dark-overlay').classList.add('show');
-
-        //         setTimeout(() => {
-        //             document.getElementById('origin-text').innerHTML = `
-        //         <h1>Origins</h1>
-        //         <p>Something emerges from the depths....</p>
-        //         <p>A final vision, drawing close.</p>
-        //         <div class="center-container basic-padding marginal-margin">
-        //             <div id="end" class="button basic-padding">start the end</div>
-        //         </div>`;
-
-        //             endAvail = true;
-        //             setTimeout(() => {
-        //                 document.getElementById('dark-overlay').classList.remove('show');
-        //             }, 1000);
-
-        //             document.getElementById('origin-text').style.opacity = '1';
-        //             const children = document.getElementById('origin-text').children;
-        //             function fadeInElements(index = 0) {
-        //                 if (index < children.length) {
-        //                     children[index].style.opacity = '1';
-        //                     setTimeout(() => {
-        //                         fadeInElements(index + 1);
-        //                     }, 1500);
-        //                 }
-        //             }
-
-        //             // Initialize opacity to 0 for all children
-        //             for (let i = 0; i < children.length; i++) {
-        //                 children[i].style.opacity = '0';
-        //             }
-        //             fadeInElements();
-
-        //         }, 500); // Adjust delay to control how long the fade-out lasts
-        //     }
-
-        //     console.log("5678");
-
-        //     // Use a mutation observer to detect changes to the 'end' element
-        //     const observer = new MutationObserver((mutations) => {
-        //         mutations.forEach((mutation) => {
-        //             if (mutation.addedNodes.length > 0) {
-        //                 const endElement = document.getElementById("end");
-        //                 if (endElement) {
-        //                     endElement.addEventListener("click", function () {
-        //                         console.log("VBN");
-        //                         document.body.style.backgroundColor = 'var(--green-dark)';
-
-        //                         document.getElementById("main-header").style.backgroundColor = 'var(--green-medium)';
-        //                         setTimeout(function () {
-        //                             document.body.style.backgroundColor = '';
-        //                             document.getElementById("main-header").style.backgroundColor = '';
-        //                             window.location.href = "../ending/encroaching-end.html";
-        //                         }, 700);
-
-        //                     });
-        //                     observer.disconnect(); // Stop observing after the event listener is added
-        //                 }
-        //             }
-        //         });
-        //     });
-
-        //     // Observe changes to the #origin-text element
-        //     observer.observe(document.getElementById('origin-text'), { childList: true });
-        // });
-
 
         const choseTail = localStorage.getItem('choseTail') === 'true';
 
