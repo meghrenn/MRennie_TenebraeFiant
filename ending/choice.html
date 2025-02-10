@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-CAN">
+
+<head>
+    <title></title>
+    <link rel="icon" type="image/png" href="../images/logo/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="../js/scripts.js"></script>
+</head>
+
+<body data-group-id="ending" data-page-id="encroaching-end">
+    <header id="main-header">
+        <ul>
+            <li id="about" class="basic-padding">About</li>
+            <li id="help" class="basic-padding">Problems</li>
+            <li id="progress" class="basic-padding">Progress</li>
+        </ul>
+    </header>
+    <main class="thick-padding containment right-container">
+        <h1>The Choice</h1>
+
+        <form class="center-container" id="end-form">
+            <div class="basic-padding">
+                <label for="end">Do you think The University of Lethbridge worth saving?</label>
+                <div id="end" style="display:flex; justify-content:space-evenly;">
+                    <input type="radio" id="yes" name="answer" value="yes" required>
+                    <label for="yes">
+                        <h2>Yes</h2>
+                    </label>
+                    <input type="radio" id="no" name="answer" value="no" required>
+                    <label for="no">
+                        <h2>No</h2>
+                    </label>
+                </div>
+            </div>
+            <input class="button basic-padding" type="submit" value="Submit">
+        </form>
+    </main>
+</body>
+
+<script>
+    document.getElementById('end-form').addEventListener('submit', function (e) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const response = formData.get('answer');
+
+        // Get IP Address
+        fetch('https://api.ipify.org?format=json')
+            .then(res => res.json())
+            .then(ipData => {
+                const data = {
+                    response: response,
+                    ip: ipData.ip,
+                    userAgent: navigator.userAgent
+                };
+
+                // Send data to Google Sheet via Apps Script Web App
+                return fetch('https://script.google.com/macros/s/AKfycbwLHNdM6cZGNl9AAUq2OFDVxJQoxuyikzxuRWEeDOQC673VT9TDPfMVItg_na2iq05IYw/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+            })
+            .then(response => response.text())
+            .then(result => {
+                var selectedOption = document.querySelector('input[name="answer"]:checked');
+                var enteredPassword = selectedOption.value;
+                let choseTail = false;
+                if (selectedOption) {
+                    if (enteredPassword === "yes") {
+                        document.body.style.backgroundColor = 'var(--green-dark)';
+                        document.getElementById("main-header").style.backgroundColor = 'var(--green-medium)';
+                        setTimeout(function () {
+                            document.body.style.backgroundColor = '';
+                            document.getElementById("main-header").style.backgroundColor = '';
+                            window.location.href = "aperture2.html";
+                        }, 700);
+                    }
+                    else {
+                        if (enteredPassword === "no") {
+                            document.body.style.backgroundColor = 'var(--green-dark)';
+                            document.getElementById("main-header").style.backgroundColor = 'var(--green-medium)';
+                            setTimeout(function () {
+                                document.body.style.backgroundColor = '';
+                                document.getElementById("main-header").style.backgroundColor = '';
+                                window.location.href = "WHAT.html";
+                            }, 700);
+                        }
+                    }
+                } else {
+                    document.body.style.backgroundColor = 'var(--red-dark)';
+                    document.getElementById("main-header").style.backgroundColor = 'var(--red-medium)';
+                    setTimeout(function () {
+                        alert("You need to make a stand. The fate of the university depends on it.");
+                        document.body.style.backgroundColor = '';
+                        document.getElementById("main-header").style.backgroundColor = '';
+                    }, 500);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+
+</html>

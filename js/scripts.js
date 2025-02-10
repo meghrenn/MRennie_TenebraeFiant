@@ -286,9 +286,9 @@ document.addEventListener('DOMContentLoaded', function () {
     "architect": "collapse",
     "collapse": "../begin/origins",
     "goodbye": "doubt",
-    "coy-site": "",
-    "encroaching-end": "aperture",
-    "aperture": "the-end",
+    "coy-site": "eldritch",
+    "encroaching-end": "aperture1",
+    "aperture1": "choice",
 
     // "hayes-and-march": "doubt",
     "future": "congrats",
