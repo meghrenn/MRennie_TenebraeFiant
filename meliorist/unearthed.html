@@ -26,10 +26,10 @@
         transition: opacity 2s ease;
     }
 
-    #continue {
+    /* #continue {
         opacity: 0;
         transition: opacity 2s ease;
-    }
+    } */
 
     #unearth-story {
         text-decoration: underline;
@@ -48,27 +48,23 @@
         <div id="text-solution">
             <h1>Unearthed</h1>
             <img src="../images/meliorist/unearthed-photograph.jpg">
-            <p><a id="unearth-story">At the groundbreaking ceremony, the self-proclaimed Prophet of
+            <p class="tangent"><a id="unearth-story">At the groundbreaking ceremony, the self-proclaimed Prophet of
                     Doom announced: "This is only the beginning."</a> Then the U of L settled down, resting
-                on the coulees and its laurels.</p>
-            <p class="tangent">(The innocuous tragedy of a dream [slipping/surging] into dissolution.)</p>
-            <p>Indeed, it is [y]our university. Will you fight for it?</p>
+                on the coulees and its laurels.... The innocuous tragedy of a dream slipping, surging into dissolution.
+            </p>
+            <p class="tangent">Indeed, it is [y]our university. Will you fight for it?</p>
+            <p class="tangent">You're excited to unearth answers, aren't you? You have no clue how much can be found by
+                covering up. Sometimes you need obfuscation to truly bring things to the surface.</p>
 
-            <p>You're excited to unearth answers, aren't you? You have no clue how much can be found by covering up.
-                Sometimes you need obfuscation to truly bring things to the surface. </p>
+            <div id="viewer" style="width: 100vw; height: 20vh;"></div>
 
             <div class="center-container basic-padding marginal-margin">
                 <a href="Unearth.obj" download class="button basic-padding">Download File</a>
             </div>
 
-            <p>Take this with you. You'll need it later.
-                <!-- You don't need to be an innovator,
-                but if you want to make it real, go to the zone
-                
-                but it only works for innovators. Get into the zone to figure
-                this out. -->
-            </p>
-            <div class="center-container basic-padding marginal-margin">
+            <p class="tangent">Take this with you. You'll need it elsewhere.</p>
+
+            <div class="center-container thick-padding marginal-margin">
                 <div id="continue" class="button basic-padding">Continue</div>
             </div>
     </main>
@@ -249,9 +245,70 @@
             earth.style.opacity = '0';
             document.getElementById('text-solution').style.opacity = '';
             document.getElementById('image-solution').classList.add("solved");
-            document.getElementById("continue").style.opacity = '1';
+            // document.getElementById("continue").style.opacity = '1';
         }
     }
+
+    document.getElementById("continue").addEventListener("click", function () {
+        document.body.style.backgroundColor = 'var(--green-dark)';
+        document.getElementById("main-header").style.backgroundColor = 'var(--green-medium)';
+        setTimeout(function () {
+            document.body.style.backgroundColor = '';
+            document.getElementById("main-header").style.backgroundColor = '';
+            window.location.href = "origins.html";
+        }, 700);
+    });
+
+
+
+// Scene setup
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.getElementById('viewer').appendChild(renderer.domElement);
+
+// Lights
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(1, 1, 1).normalize();
+scene.add(light);
+
+// Controls
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; // Smooth rotation
+controls.dampingFactor = 0.05;
+
+// Load OBJ model
+const loader = new THREE.OBJLoader();
+loader.load('unearth.obj', (obj) => {
+  obj.scale.set(1, 1, 1); // Adjust scale if needed
+  scene.add(obj);
+}, undefined, (error) => {
+  console.error('An error happened:', error);
+});
+
+// Camera position
+camera.position.z = 5;
+
+// Render loop
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+
+// Responsive resizing
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+
+
+
+
 
     document.getElementById("unearth-story").addEventListener("click", function () {
         if (diggingsDone) {

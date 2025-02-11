@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //Check passwords
   var pageNextStep = {
-    "explanation": "../begin/initiation",
+    "explanation": "initiation",
     "initiation": "luck",
     "head": "origins",
     "tail": "origins",

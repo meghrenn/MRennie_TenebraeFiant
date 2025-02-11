@@ -24,7 +24,7 @@
 
         <form class="center-container" id="end-form">
             <div class="basic-padding">
-                <label for="end">Do you think The University of Lethbridge worth saving?</label>
+                <label for="end">Is The University of Lethbridge worth saving?</label>
                 <div id="end" style="display:flex; justify-content:space-evenly;">
                     <input type="radio" id="yes" name="answer" value="yes" required>
                     <label for="yes">
@@ -68,9 +68,9 @@
             })
             .then(response => response.text())
             .then(result => {
+                console.log("result achieved");
                 var selectedOption = document.querySelector('input[name="answer"]:checked');
                 var enteredPassword = selectedOption.value;
-                let choseTail = false;
                 if (selectedOption) {
                     if (enteredPassword === "yes") {
                         document.body.style.backgroundColor = 'var(--green-dark)';
