@@ -63,7 +63,7 @@
             <div id="viewer" style="width: 70vw; height: 40vh;"></div>
 
             <div class="center-container basic-padding marginal-margin">
-                <a href="Unearth.obj" download class="button basic-padding">Download File</a>
+                <a href="unearth.obj" download class="button basic-padding">Download File</a>
             </div>
 
             <p class="tangent">Take this with you. You'll need it elsewhere.</p>
@@ -248,7 +248,7 @@
             diggingsDone = true;
             earth.style.opacity = '0';
             document.getElementById('text-solution').style.opacity = '';
-            document.getElementById('image-solution').classList.add("solved");
+            // document.getElementById('image-solution').classList.add("solved");
             // document.getElementById("continue").style.opacity = '1';
         }
     }
@@ -278,24 +278,38 @@
     const light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.set(1, 1, 1).normalize();
     scene.add(light);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    scene.add(ambientLight);
+
 
     // Controls
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true; // Smooth rotation
     controls.dampingFactor = 0.05;
+    controls.target.set(0, 0, 0);
+    controls.update();
+
 
     // Load OBJ model
     const loader = new THREE.OBJLoader();
-    loader.load('unearth.obj', (obj) => {
-        obj.scale.set(1, 1, 1); // Adjust scale if needed
-        obj.position.set(0, 0, 0);
+    loader.load('../meliorist/unearth.obj', (obj) => {
+
+        obj.scale.set(0.5, 0.5, 0.5);       // Shrink if too large
+        obj.position.set(0, 0, 0);          // Center the model
         scene.add(obj);
+
+        const box = new THREE.Box3().setFromObject(obj);
+        const center = box.getCenter(new THREE.Vector3());
+        controls.target.copy(center);       // Focus the controls on the model
+        camera.position.z = box.getSize(new THREE.Vector3()).length() * 1.5;
+
     }, undefined, (error) => {
         console.error('An error happened:', error);
     });
 
     // Camera position
-    camera.position.z = 5;
+    camera.position.set(0, 0, 10);  // Move camera back along the Z-axis
+
 
     // Render loop
     function animate() {
