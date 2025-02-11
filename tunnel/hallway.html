@@ -91,7 +91,7 @@
                 alt="A black and white photograph inside the 6th floor of UHall. The building is completely empty.">
             <div id="progress-patch" onclick="window.location.href='4-words.html'"></div>
             <div id="hold-words1">
-                <p class="hold-words" style=" top:0; left: 0; rotate:351deg;"></p>
+                <p class="hold-words" style="top:0; left: 0; rotate:351deg;"></p>
                 <p class="hold-words" style=" left: 70px; rotate:353deg;">Keep going.</p>
             </div>
         </div>
@@ -103,7 +103,7 @@
         const pic = document.getElementById('hall');
         const progressPatch = document.getElementById('progress-patch');
         const hold1 = document.getElementById('hold-words1');
-        const hold2 = document.getElementById('hold-words2');
+        // const hold2 = document.getElementById('hold-words2');
         const svgElement = document.querySelector('svg');
 
         const adjustPositions = () => {
@@ -117,8 +117,8 @@
 
             hold1.style.top = `${picHeight * -0.95}px`;
             hold1.style.left = `${picHeight * 0.05}px`;
-            hold2.style.top = `${picHeight * -0.15}px`;
-            hold2.style.left = `${picHeight * 0.8}px`;
+            // hold2.style.top = `${picHeight * -0.15}px`;
+            // hold2.style.left = `${picHeight * 0.8}px`;
         };
 
         adjustPositions();
