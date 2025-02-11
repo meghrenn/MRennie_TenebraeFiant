@@ -49,6 +49,7 @@
 
         // Get IP Address
         fetch('https://api.ipify.org?format=json')
+
             .then(res => res.json())
             .then(ipData => {
                 const data = {
@@ -58,10 +59,11 @@
                 };
 
                 // Send data to Google Sheet via Apps Script Web App
-                return fetch('https://script.google.com/macros/s/AKfycbwLHNdM6cZGNl9AAUq2OFDVxJQoxuyikzxuRWEeDOQC673VT9TDPfMVItg_na2iq05IYw/exec', {
+                return fetch('https://script.google.com/macros/s/AKfycbw0zabngtgZHde6zhGenIon-ojtqDLAkeA07RRa9lpRfhtnqG-VisyaQFuNUnfUEsGYYg/exec', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'  // 🚀 This line handles CORS
                     },
                     body: JSON.stringify(data)
                 });

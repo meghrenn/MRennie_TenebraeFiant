@@ -60,7 +60,7 @@
             <p class="tangent">You're excited to unearth answers, aren't you? You have no clue how much can be found by
                 covering up. Sometimes you need obfuscation to truly bring things to the surface.</p>
 
-            <div id="viewer" style="width: 70vw; height: 40vh;"></div>
+            <!-- <div id="viewer" style="width: 70vw; height: 40vh;"></div> -->
 
             <div class="center-container basic-padding marginal-margin">
                 <a href="unearth.obj" download class="button basic-padding">Download File</a>
@@ -264,67 +264,67 @@
     });
 
 
-    console.log(THREE); // If this logs an object, it's working!
+    // console.log(THREE); // If this logs an object, it's working!
 
-    // Scene setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xeeeeee);
-    document.getElementById('viewer').appendChild(renderer.domElement);
+    // // Scene setup
+    // const scene = new THREE.Scene();
+    // const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    // const renderer = new THREE.WebGLRenderer({ antialias: true });
+    // renderer.setSize(window.innerWidth, window.innerHeight);
+    // renderer.setClearColor(0xeeeeee);
+    // document.getElementById('viewer').appendChild(renderer.domElement);
 
-    // Lights
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(1, 1, 1).normalize();
-    scene.add(light);
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-    scene.add(ambientLight);
-
-
-    // Controls
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true; // Smooth rotation
-    controls.dampingFactor = 0.05;
-    controls.target.set(0, 0, 0);
-    controls.update();
+    // // Lights
+    // const light = new THREE.DirectionalLight(0xffffff, 1);
+    // light.position.set(1, 1, 1).normalize();
+    // scene.add(light);
+    // const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    // scene.add(ambientLight);
 
 
-    // Load OBJ model
-    const loader = new THREE.OBJLoader();
-    loader.load('../meliorist/unearth.obj', (obj) => {
-
-        obj.scale.set(0.5, 0.5, 0.5);       // Shrink if too large
-        obj.position.set(0, 0, 0);          // Center the model
-        scene.add(obj);
-
-        const box = new THREE.Box3().setFromObject(obj);
-        const center = box.getCenter(new THREE.Vector3());
-        controls.target.copy(center);       // Focus the controls on the model
-        camera.position.z = box.getSize(new THREE.Vector3()).length() * 1.5;
-
-    }, undefined, (error) => {
-        console.error('An error happened:', error);
-    });
-
-    // Camera position
-    camera.position.set(0, 0, 10);  // Move camera back along the Z-axis
+    // // Controls
+    // const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    // controls.enableDamping = true; // Smooth rotation
+    // controls.dampingFactor = 0.05;
+    // controls.target.set(0, 0, 0);
+    // controls.update();
 
 
-    // Render loop
-    function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-    }
-    animate();
+    // // Load OBJ model
+    // const loader = new THREE.OBJLoader();
+    // loader.load('../meliorist/unearth.obj', (obj) => {
 
-    // Responsive resizing
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+    //     obj.scale.set(0.5, 0.5, 0.5);       // Shrink if too large
+    //     obj.position.set(0, 0, 0);          // Center the model
+    //     scene.add(obj);
+
+    //     const box = new THREE.Box3().setFromObject(obj);
+    //     const center = box.getCenter(new THREE.Vector3());
+    //     controls.target.copy(center);       // Focus the controls on the model
+    //     camera.position.z = box.getSize(new THREE.Vector3()).length() * 1.5;
+
+    // }, undefined, (error) => {
+    //     console.error('An error happened:', error);
+    // });
+
+    // // Camera position
+    // camera.position.set(0, 0, 10);  // Move camera back along the Z-axis
+
+
+    // // Render loop
+    // function animate() {
+    //     requestAnimationFrame(animate);
+    //     controls.update();
+    //     renderer.render(scene, camera);
+    // }
+    // animate();
+
+    // // Responsive resizing
+    // window.addEventListener('resize', () => {
+    //     camera.aspect = window.innerWidth / window.innerHeight;
+    //     camera.updateProjectionMatrix();
+    //     renderer.setSize(window.innerWidth, window.innerHeight);
+    // });
 
 
 
