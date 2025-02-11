@@ -129,7 +129,7 @@
         const svgElement = document.querySelector('svg');
         const path = document.getElementById('path');
 
-        const adjustPositions = () => { 
+        const adjustPositions = () => {
             const picHeight = pic.offsetHeight;
             const picWidth = pic.offsetWidth;
 
@@ -147,7 +147,7 @@
 
             path.setAttribute('d', `M 0,${picHeight * 0.06} 
                         A ${picWidth * 0.05},${picHeight * 0.05} 0 0 1 ${picWidth * 0.05},${picHeight * 0.2} `);
-            path.setAttribute('width', `${picHeight * 0.2}px`); 
+            path.setAttribute('width', `${picHeight * 0.2}px`);
             path.setAttribute('height', `${picHeight * 0.2}px`);
             path.setAttribute('transform', `translate(${picHeight * 0.31}, ${picHeight * 0.46})`);
 
@@ -158,4 +158,5 @@
 
     screen.orientation.lock('portrait');
 </script>
+
 </html>
