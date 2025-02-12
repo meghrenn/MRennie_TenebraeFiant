@@ -11,27 +11,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
-
 </head>
 <style>
-    #text-solution {
-        position: relative;
-        z-index: 3;
-        transition: 0.25s ease-in-out;
-    }
-
-    #earth {
-        position: fixed;
-        display: block;
-        top: 0;
-        object-fit: fill;
-        z-index: 3;
-        pointer-events: none;
-        transition: opacity 2s ease;
-    }
-
-    #unearth-story {
-        text-decoration: underline;
+    #viewer {
+        width: 100%;
+        aspect-ratio: 1 / 1;
     }
 </style>
 
@@ -44,207 +28,30 @@
         </ul>
     </header>
     <main class="thick-padding containment">
-        <div id="text-solution">
-            <h1>Unearthed</h1>
-            <img src="../images/meliorist/unearthed-photograph.jpg">
-            <p class="tangent">At the <a id="unearth-story">groundbreaking ceremony</a>, the self-proclaimed Prophet
-                of Doom announced: "This is only the beginning." Then the University of Lethbridge settled down, resting
-                on the coulees and its laurels.... The innocuous tragedy of a dream slipping, surging into dissolution.
-            </p>
-            <p class="tangent">Indeed, it is [y]our university. Will you fight for it?</p>
-            <p class="tangent">You're excited to unearth answers, aren't you? You have no clue how much can be found by
-                covering up. Sometimes you need obfuscation to truly bring things to the surface.</p>
-
-            <div id="viewer" style="width: 70vw; height: 70vw;"></div>
-
-            <div class="center-container basic-padding marginal-margin">
-                <a href="unearth.obj" download class="button basic-padding">Download</a>
-            </div>
-
-            <div class="center-container thick-padding marginal-margin">
-                <div id="continue" class="button basic-padding">Continue</div>
-            </div>
+        <h1>Unearthed</h1>
+        <img src="../images/meliorist/unearthed-photograph.jpg">
+        <p>At the <a href="https://digitallibrary.uleth.ca/digital/collection/publications/id/6797/rec/26"
+                target="_blank">
+                groundbreaking ceremony</a>, the self-proclaimed Prophet
+            of Doom announced: "This is only the beginning."</p>
+        <p class="tangent"> Then the University of Lethbridge settled down, resting
+            on the coulees and its laurels. An innocuous tragedy; a dream slipping, surging into dissolution.
+        </p>
+        <p class="tangent">However, still is [y]our university. Will you fight for it?</p>
+        <p>It's exciting to unearth answers, yet so much can be found by
+            covering up. Sometimes you need obfuscation to truly bring things to the surface. </p>
+        <p>Take this; you'll need it
+            elsewhere.</p>
+        <div id="viewer"></div>
+        <div class="center-container basic-padding marginal-margin">
+            <a href="unearth.obj" download class="button basic-padding">Download</a>
+        </div>
+        <div class="center-container thick-padding marginal-margin">
+            <div id="continue" class="button basic-padding">Continue</div>
     </main>
     <div id="header-container"></div>
-
 </body>
 <script>
-    screen.orientation.lock('portrait');
-
-    document.getElementById('text-solution').style.opacity = '0.1';
-
-    let erasedPixels = 0;
-    const earth = document.createElement('canvas');
-    earth.id = 'earth';
-    let isTouchingCanvas = false;
-    let diggingsDone = false;
-
-
-    earth.width = window.innerWidth;
-    earth.height = window.innerHeight;
-    var maxWidth = earth.width - 150;
-    document.body.appendChild(earth);
-
-    const ctx = earth.getContext('2d'); // Get the 2D rendering context for the canvas
-    ctx.willReadFrequently = true;
-
-    var fontSize = 30;
-    ctx.font = fontSize + "px 'Abscissa'";
-    var lineHeight = fontSize + 5;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    var text = "“As I turned up the stinking black earth... I trembled at the dubious thoughts of what I might uncover. Some secrets of inner earth are not good for mankind, and this seemed to me one of them.”"
-
-    // Function to draw wrapped text
-    function wrapText(text, x, y, maxWidth, lineHeight) {
-        var words = text.split(' ');
-        var line = '';
-        var offsetY = 0;
-        for (var i = 0; i < words.length; i++) {
-            var testLine = line + words[i] + ' ';
-            var metrics = ctx.measureText(testLine);
-            var testWidth = metrics.width;
-            if (testWidth > maxWidth && i > 0) {
-                ctx.fillText(line, x, y + offsetY);
-                line = words[i] + ' ';
-                offsetY += lineHeight;
-            }
-            else {
-                line = testLine;
-            }
-        }
-        ctx.fillText(line, x, y + offsetY);
-    }
-
-
-    document.addEventListener("DOMContentLoaded", function () {
-        function hexToRGBA(hex, opacity) {
-            // Remove '#' if present
-            hex = hex.replace('#', '');
-
-            // Parse RGB components
-            const r = parseInt(hex.substring(0, 2), 16);
-            const g = parseInt(hex.substring(2, 4), 16);
-            const b = parseInt(hex.substring(4, 6), 16);
-
-            // Return rgba format
-            return `rgba(${r}, ${g}, ${b}, ${opacity})`;
-        }
-
-        // 1) Fill #earth with a rectangle that completely covers the element
-        ctx.fillStyle = '#31273c';
-        ctx.fillRect(0, 0, earth.width, earth.height);
-
-        // 2) Cover the brown rectangle with squiggly lines colored darker brown
-        // Convert hexadecimal color code to rgba format with opacity
-        // Convert hex color to rgba format
-        // const hexColor = '#5F4B8B'; // Example hex color code (darker brown)
-        // const opacity = 0.5; // Opacity value between 0 and 1
-        ctx.strokeStyle = hexToRGBA('#413450', 0.5);
-
-        // ctx.lineWidth = 5; // Set line width
-        ctx.lineCap = 'round'; // Set line cap to round
-        ctx.lineJoin = 'round'; // Set line join to round
-
-        for (let i = 0; i < (earth.width / 4); i++) {
-            ctx.beginPath();
-            let startX = Math.random() * earth.width;
-            let startY = Math.random() * earth.height;
-            ctx.moveTo(startX, startY);
-
-            // Generate a series of random points to create the squiggly line
-            for (let j = 0; j < 40; j++) {
-                const newX = startX + Math.random() * 40 - 20; // Random x-coordinate within 20 units of startX
-                const newY = startY + Math.random() * 40 - 20; // Random y-coordinate within 20 units of startY
-
-                // Ensure that the new point is within the canvas bounds
-                startX = Math.max(0, Math.min(earth.width, newX));
-                startY = Math.max(0, Math.min(earth.height, newY));
-
-                //Vary stroke width
-                const strokeWidth = Math.random() * 4 + 2;
-                ctx.lineWidth = strokeWidth;
-
-                ctx.lineTo(startX, startY);
-            }
-
-            ctx.stroke();
-        }
-
-        // 5) Cover the brown rectangle with scattered lines resembling pine needles
-        ctx.strokeStyle = hexToRGBA('#4C405C', 0.8);
-        ctx.fillStyle = hexToRGBA('#4C405C', 0.8);
-        ctx.lineWidth = 3; // Set line width
-
-        for (let i = 0; i < 100; i++) {
-            const startX = Math.random() * earth.width;
-            const startY = Math.random() * earth.height;
-            const length = Math.random() * 10 + 5; // Random length between 5 and 15
-
-            // Generate a series of points to define the shape of the pine needle
-            const points = [];
-            points.push({ x: startX, y: startY });
-            for (let j = 1; j <= 10; j++) {
-                const angle = Math.random() * Math.PI - Math.PI / 2; // Random angle between -π/2 and π/2
-                const x = startX + Math.cos(angle) * (length - (length * j) / 10); // Gradually decrease x-coordinate
-                const y = startY + Math.sin(angle) * (length - (length * j) / 10); // Gradually decrease y-coordinate
-                points.push({ x, y });
-            }
-
-            // Draw the pine needle shape
-            ctx.beginPath();
-            ctx.moveTo(points[0].x, points[0].y);
-            for (let k = 1; k < points.length; k++) {
-                ctx.lineTo(points[k].x, points[k].y);
-            }
-            ctx.closePath(); // Close the path to create a closed shape
-            ctx.fill(); // Fill the shape
-            ctx.stroke(); // Stroke the shape
-        }
-        //6. TEXT
-        ctx.fillStyle = "#ffffff";
-        wrapText(text, earth.width / 2, earth.height / 4, maxWidth, lineHeight);
-    });
-
-    document.addEventListener('click', handleMove);
-    document.addEventListener('touchmove', handleMove);
-
-    function handleMove(event) {
-        // event.preventDefault(); // Prevent default touch action (like scrolling)
-        const rect = earth.getBoundingClientRect();
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
-        const radius = 60; // Radius of the circular erasing area
-
-        for (let x = 0; x < rect.width; x++) {
-            for (let y = 0; y < rect.height; y++) {
-                const distance = Math.sqrt((x - mouseX) ** 2 + (y - mouseY) ** 2); // Distance from mouse coordinates
-
-                if (distance <= radius) {
-                    const pixel = ctx.getImageData(x, y, 1, 1); // Get pixel data at current coordinates
-                    if (pixel.data[3] !== 0) { // Check if the pixel is visible (not fully transparent)
-                        ctx.clearRect(x, y, 1, 1); // Erase the pixel
-                        erasedPixels++;
-                    }
-                }
-            }
-        }
-
-        // Play random audio clip
-        const randomClipNumber = Math.floor(Math.random() * 5) + 1; // Generate random number between 1 and 5
-        const audio = new Audio(`../audio/dirt${randomClipNumber}.mp3`); // Construct path to random audio clip
-        if (!diggingsDone) {
-            audio.play();
-        }
-        if (erasedPixels >= 0.75 * (rect.width * rect.height)) { // Check if at least 75% of pixels are erased
-            diggingsDone = true;
-            earth.style.opacity = '0';
-            document.getElementById('text-solution').style.opacity = '';
-            // document.getElementById('image-solution').classList.add("solved");
-            // document.getElementById("continue").style.opacity = '1';
-        }
-    }
-
     document.getElementById("continue").addEventListener("click", function () {
         document.body.style.backgroundColor = 'var(--green-dark)';
         document.getElementById("main-header").style.backgroundColor = 'var(--green-medium)';
@@ -255,12 +62,7 @@
         }, 700);
     });
 
-    document.getElementById("unearth-story").addEventListener("click", function () {
-        if (diggingsDone) {
-            window.location.href = "https://digitallibrary.uleth.ca/digital/collection/publications/id/6797/rec/26";
 
-        }
-    });
 
     console.log(THREE); // If this logs an object, it's working!
 

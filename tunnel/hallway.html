@@ -104,29 +104,30 @@
         const progressPatch = document.getElementById('progress-patch');
         const hold1 = document.getElementById('hold-words1');
         // const hold2 = document.getElementById('hold-words2');
-        const svgElement = document.querySelector('svg');
 
         const adjustPositions = () => {
             const picHeight = pic.offsetHeight;
             const picWidth = pic.offsetWidth;
 
-            progressPatch.style.top = `${picHeight * 0.57}px`;
-            progressPatch.style.left = `${picWidth * 0.53}px`;
-            progressPatch.style.width = `${picWidth * 0.11}px`;
-            progressPatch.style.height = `${picHeight * 0.07}px`;
+            // Only apply styles if width is not zero
+            if (picWidth > 0 && picHeight > 0) {
+                progressPatch.style.top = `${picHeight * 0.57}px`;
+                progressPatch.style.left = `${picWidth * 0.53}px`;
+                progressPatch.style.width = `${picWidth * 0.11}px`;
+                progressPatch.style.height = `${picHeight * 0.07}px`;
 
-            hold1.style.top = `${picHeight * -0.95}px`;
-            hold1.style.left = `${picHeight * 0.05}px`;
-            // hold2.style.top = `${picHeight * -0.15}px`;
-            // hold2.style.left = `${picHeight * 0.8}px`;
+                hold1.style.top = `${picHeight * -0.95}px`;
+                hold1.style.left = `${picHeight * 0.05}px`;
+            } else {
+                // Retry after a short delay if the layout isn't ready
+                requestAnimationFrame(adjustPositions);
+            }
         };
 
-        // Ensure layout is ready
-        requestAnimationFrame(adjustPositions);
-
-        // Adjust positions on window resize
-        window.addEventListener('resize', adjustPositions);
+        adjustPositions();  // Initial adjustment
+        window.addEventListener('resize', adjustPositions); // Adjust on resize
     });
+
 
 </script>
 

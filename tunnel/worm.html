@@ -107,39 +107,38 @@
             const picHeight = pic.offsetHeight;
             const picWidth = pic.offsetWidth;
 
-            progressPatch.style.top = `${picHeight * 0.42}px`;
-            progressPatch.style.left = `${picWidth * 0.45}px`;
-            progressPatch.style.width = `${picWidth * 0.17}px`;
-            progressPatch.style.height = `${picHeight * 0.17}px`;
+            if (picWidth > 0 && picHeight > 0) {
+                progressPatch.style.top = `${picHeight * 0.42}px`;
+                progressPatch.style.left = `${picWidth * 0.45}px`;
+                progressPatch.style.width = `${picWidth * 0.17}px`;
+                progressPatch.style.height = `${picHeight * 0.17}px`;
 
-            holdWords.style.top = `${picHeight * -0.55}px`;
-            holdWords.style.left = `${picHeight * 0.05}px`;
-
-
-            svgElement.style.width = `${picWidth}px`;
-            svgElement.style.height = `${picHeight}px`;
-            svgElement.setAttribute('viewBox', `${picHeight * -0.95} ${picHeight * -0.05} ${picWidth} ${picHeight}`);
+                holdWords.style.top = `${picHeight * -0.55}px`;
+                holdWords.style.left = `${picHeight * 0.05}px`;
 
 
-            const path = document.getElementById('path');
-            path.setAttribute('width', `${picHeight * 0.2}px`);
-            path.setAttribute('height', `${picHeight * 0.2}px`);
+                svgElement.style.width = `${picWidth}px`;
+                svgElement.style.height = `${picHeight}px`;
+                svgElement.setAttribute('viewBox', `${picHeight * -0.95} ${picHeight * -0.05} ${picWidth} ${picHeight}`);
 
-            path.setAttribute('d', `M ${picWidth * 0.12},${picHeight * 0.5} 
+
+                const path = document.getElementById('path');
+                path.setAttribute('width', `${picHeight * 0.2}px`);
+                path.setAttribute('height', `${picHeight * 0.2}px`);
+
+                path.setAttribute('d', `M ${picWidth * 0.12},${picHeight * 0.5} 
                         A ${picWidth * 0.08},${picHeight * 0.09} 0 0 1 ${picWidth * 0.257},${picHeight * 0.6} 
                         A ${picWidth * 0.08},${picHeight * 0.08} 0 0 1 ${picWidth * 0.2},${picHeight * 0.5}`);
-            path.setAttribute('transform', `translate(${picHeight * -0.48}, ${picHeight * -0.085})`);
+                path.setAttribute('transform', `translate(${picHeight * -0.48}, ${picHeight * -0.085})`);
 
-            path.setAttribute('fill', 'none');
-            path.setAttribute('stroke', 'none');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke', 'none');
+            } else {
+                requestAnimationFrame(adjustPositions); // Retry after a short delay if the layout isn't ready
+            }
         };
-
-        // Ensure layout is ready
-        requestAnimationFrame(adjustPositions);
-
-        // Adjust positions on window resize
-        window.addEventListener('resize', adjustPositions);
-        window.addEventListener('resize', adjustPositions);
+        adjustPositions();  // Initial adjustment
+        window.addEventListener('resize', adjustPositions); // Adjust positions on window resize
     });
 
 </script>
