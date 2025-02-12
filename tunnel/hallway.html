@@ -121,9 +121,13 @@
             // hold2.style.left = `${picHeight * 0.8}px`;
         };
 
-        adjustPositions();
+        // Ensure layout is ready
+        requestAnimationFrame(adjustPositions);
+
+        // Adjust positions on window resize
         window.addEventListener('resize', adjustPositions);
     });
+
 </script>
 
 </html>

@@ -85,9 +85,7 @@
                 <p class="hold-words" style="left: 120px;rotate:-8deg;">With no way out but through,</p>
             </div>
             <svg id="svg">
-                <!-- <path id="path" d="M 10% 25% A 25% 25% 0 0 1 90% 25% A 25% 25% 0 0 1 10% 25%" /> -->
                 <path id="path" d="M 10 25 A 25 25 0 0 1 90 25 A 25 25 0 0 1 10 25" />
-
                 <text>
                     <textPath alignment-baseline="top" xlink:href="#path">
                         where will this wormhole lead?
@@ -109,12 +107,10 @@
             const picHeight = pic.offsetHeight;
             const picWidth = pic.offsetWidth;
 
-
             progressPatch.style.top = `${picHeight * 0.42}px`;
             progressPatch.style.left = `${picWidth * 0.45}px`;
             progressPatch.style.width = `${picWidth * 0.17}px`;
             progressPatch.style.height = `${picHeight * 0.17}px`;
-
 
             holdWords.style.top = `${picHeight * -0.55}px`;
             holdWords.style.left = `${picHeight * 0.05}px`;
@@ -124,43 +120,25 @@
             svgElement.style.height = `${picHeight}px`;
             svgElement.setAttribute('viewBox', `${picHeight * -0.95} ${picHeight * -0.05} ${picWidth} ${picHeight}`);
 
+
             const path = document.getElementById('path');
             path.setAttribute('width', `${picHeight * 0.2}px`);
             path.setAttribute('height', `${picHeight * 0.2}px`);
 
-
-            //works for smaller type:
             path.setAttribute('d', `M ${picWidth * 0.12},${picHeight * 0.5} 
                         A ${picWidth * 0.08},${picHeight * 0.09} 0 0 1 ${picWidth * 0.257},${picHeight * 0.6} 
                         A ${picWidth * 0.08},${picHeight * 0.08} 0 0 1 ${picWidth * 0.2},${picHeight * 0.5}`);
             path.setAttribute('transform', `translate(${picHeight * -0.48}, ${picHeight * -0.085})`);
 
-
-            //working on bigger type:
-            // path.setAttribute('d', `M ${picWidth * 0.12},${picHeight * 0.5} 
-            //             A ${picWidth * 0.12},${picHeight * 0.11} 0 0 1 ${picWidth * 0.23},${picHeight * 0.7} 
-            //             A ${picWidth * 0.1},${picHeight * 0.02} -80 0 1 ${picWidth * 0.2},${picHeight * 0.5}`);
-            // path.setAttribute('transform', `translate(${picHeight * -0.44}, ${picHeight * -0.46})`);
-            // path.style.transformOrigin = "center";
-            // path.style.rotate = "-22deg";
-
-
-
-
             path.setAttribute('fill', 'none');
             path.setAttribute('stroke', 'none');
-            // svgElement.style.top = `${ picHeight * - 1.07}px`;
-            // svgElement.style.left = `${ picHeight * 0.495 } px`;
-            // svgElement.style.height = `${ picheight * 0.856 } px`;
-            // svgElement.style.width = `${ picheight * 0.4 } px`;
-            // path.setAttribute('d', `M ${ picWidth * 0.1 },${ picHeight * 0.5 } A ${ picWidth * 0.05 },${ picHeight * 0.03 } 0 0 1 ${ picWidth * 0.25 },${ picHeight * 0.4 } A ${ picWidth * 0.1 },${ picHeight * 0.06 } 0 0 1 ${ picWidth * 0.1 },${ picHeight * 0.5 } `);
-            // path.setAttribute('d', `M ${ picWidth * 0.1 },${ picHeight * 0.5 } A ${ picWidth * 0.05 },${ picHeight * 0.03 } 0 0 1 ${ picWidth * 0.25 },${ picHeight * 0.4 } A ${ picWidth * 0.1 },${ picHeight * 0.06 } 0 0 1 ${ picWidth * 0.1 },${ picHeight * 0.5 }`); 
-
-
-
         };
 
-        adjustPositions();
+        // Ensure layout is ready
+        requestAnimationFrame(adjustPositions);
+
+        // Adjust positions on window resize
+        window.addEventListener('resize', adjustPositions);
         window.addEventListener('resize', adjustPositions);
     });
 

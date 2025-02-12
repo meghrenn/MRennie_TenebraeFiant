@@ -12,39 +12,28 @@
 </head>
 
 <body data-group-id="ending" data-page-id="encroaching-end">
-    <header id="main-header">
-        <ul>
-            <li id="about" class="basic-padding">About</li>
-            <li id="help" class="basic-padding">Problems</li>
-            <li id="progress" class="basic-padding">Progress</li>
-        </ul>
-    </header>
-    <main class="thick-padding containment right-container">
-        <h1>The Choice</h1>
-
-        <form class="center-container" id="end-form">
-            <div class="basic-padding">
-                <label for="end">Is The University of Lethbridge worth saving?</label>
-                <div id="end" style="display:flex; justify-content:space-evenly;">
-                    <input type="radio" id="yes" name="answer" value="yes" required>
-                    <label for="yes">
-                        <h2>Yes</h2>
-                    </label>
-                    <input type="radio" id="no" name="answer" value="no" required>
-                    <label for="no">
-                        <h2>No</h2>
-                    </label>
-                </div>
+    <form class="center-container" id="end-form">
+        <div class="basic-padding">
+            <label for="end">Is The University of Lethbridge worth saving?</label>
+            <div id="end" style="display:flex; justify-content:space-evenly;">
+                <input type="radio" id="yes" name="answer" value="yes" required>
+                <label for="yes">
+                    <h2>Yes</h2>
+                </label>
+                <input type="radio" id="no" name="answer" value="no" required>
+                <label for="no">
+                    <h2>No</h2>
+                </label>
             </div>
-            <input class="button basic-padding" type="submit" value="Submit">
-        </form>
+        </div>
+        <input class="button basic-padding" type="submit" value="Submit">
+    </form>
     </main>
-    <div id="header-container"></div>
 </body>
 
 <script>
     document.getElementById('end-form').addEventListener('submit', function (e) {
-        e.preventDefault();
+        event.preventDefault();
         const formData = new FormData(this);
         const response = formData.get('answer');
 
@@ -60,10 +49,12 @@
                 };
 
                 // Send data to Google Sheet via Apps Script Web App
-                return fetch('https://script.google.com/macros/s/AKfycbyADmraLc_dawItUMWKQGV67uHoSM5Rf-sRSYjo6FZe2JqdfWkaQlV7HqmGb4fa8yAbRA/exec', {
+                return fetch('https://script.google.com/macros/s/AKfycbw0zabngtgZHde6zhGenIon-ojtqDLAkeA07RRa9lpRfhtnqG-VisyaQFuNUnfUEsGYYg/exec', {
                     method: 'POST',
+                    mode: 'cors',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'  // 🚀 This line handles CORS
                     },
                     body: JSON.stringify(data)
                 });
