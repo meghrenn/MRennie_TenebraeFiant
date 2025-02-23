@@ -40,22 +40,6 @@
 }
 
 @font-face {
-    font-family: "Thunderman";
-    src: local('Thunderman'), url("../typefaces/Thunderman.ttf") format('truetype');
-    font-style: normal;
-    font-weight: normal;
-    /*Designer: Tmanfan https://www.1001freefonts.com/thunderman.font*/
-}
-
-@font-face {
-    font-family: "Hypertension";
-    src: local('Hypertension'), url("../typefaces/Hypertension.ttf") format('truetype');
-    font-style: normal;
-    font-weight: normal;
-    /*Designer: Bionic Type https://www.1001freefonts.com/hypertension.font*/
-}
-
-@font-face {
     font-family: "Type";
     src: local('OldNewspaperTypes'), url("../typefaces/OldNewspaperTypes.ttf") format('truetype');
     font-style: normal;

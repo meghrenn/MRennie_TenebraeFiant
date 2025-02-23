@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(currentPage);
       console.log(correctPassword);
       event.preventDefault();
-      var enteredPassword = document.getElementById("file-pass").value;
+      var enteredPassword = document.getElementById("file-pass").value.trim().toLowerCase();
       if (enteredPassword === correctPassword) {
         success();
       } else {

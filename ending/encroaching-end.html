@@ -82,9 +82,9 @@
 
             paragraphs.forEach((paragraph, index) => {
                 setTimeout(function () {
-                    typeText(poemElement, paragraph.textContent, 50); // Adjust speed as needed
+                    typeText(poemElement, paragraph.textContent, 15); // Adjust speed as needed
                     poemElement.innerHTML += "<br>"; // Add line break after each paragraph
-                }, index * 2000); // Adjust delay between paragraphs as needed
+                }, index * 1000); // Adjust delay between paragraphs as needed
 
                 // Check if it's the last paragraph
                 if (index === paragraphs.length - 1) {
@@ -102,7 +102,7 @@
                             you’ve passed the past, now comes
                             the <a class="clue-text">E</a>nd.
                         `;
-                    }, index * 2000 + 1000); // Set delay after typing animation
+                    }, index * 1000 + 1000); // Set delay after typing animation
 
                 }
             });

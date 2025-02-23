@@ -27,10 +27,6 @@
         filter: brightness(0.1);
     }
 
-    #continue {
-        display: none;
-    }
-
     #earth {
         position: fixed;
         display: block;
@@ -46,27 +42,14 @@
     <main class="thick-padding containment">
         <h1 id="header-solution">Digging</h1>
         <img id="img-solution" src="../images/meliorist/unearthed-photograph.jpg">
-        <div class="center-container thick-padding marginal-margin">
-            <div id="continue" class="button basic-padding">Continue</div>
-        </div>
     </main>
 </body>
 <script>
-    document.getElementById("continue").addEventListener("click", function () {
-        document.body.style.backgroundColor = 'var(--green-dark)';
-        setTimeout(function () {
-            document.body.style.backgroundColor = '';
-            window.location.href = "unearthed.html";
-        }, 700);
-    });
-
     screen.orientation.lock('portrait');
 
-    let erasedPixels = 0;
     const earth = document.createElement('canvas');
     earth.id = 'earth';
-    let isTouchingCanvas = false;
-    let diggingsDone = false;
+    const ctx = earth.getContext("2d", { willReadFrequently: true }); // Get the 2D rendering context for the canvas
 
 
     earth.width = window.innerWidth;
@@ -74,8 +57,9 @@
     var maxWidth = earth.width - 150;
     document.body.appendChild(earth);
 
-    const ctx = earth.getContext('2d'); // Get the 2D rendering context for the canvas
-    ctx.willReadFrequently = true;
+    let erasedPixels = 0;
+    let totalPixels = earth.width * earth.height;
+    let checkInterval = 500; // Check every 500ms instead of every frame
 
     var fontSize = 30;
     ctx.font = fontSize + "px 'Abscissa'";
@@ -125,13 +109,8 @@
         ctx.fillRect(0, 0, earth.width, earth.height);
 
         // 2) Cover the brown rectangle with squiggly lines colored darker brown
-        // Convert hexadecimal color code to rgba format with opacity
-        // Convert hex color to rgba format
-        // const hexColor = '#5F4B8B'; // Example hex color code (darker brown)
-        // const opacity = 0.5; // Opacity value between 0 and 1
         ctx.strokeStyle = hexToRGBA('#413450', 0.5);
 
-        // ctx.lineWidth = 5; // Set line width
         ctx.lineCap = 'round'; // Set line cap to round
         ctx.lineJoin = 'round'; // Set line join to round
 
@@ -195,48 +174,77 @@
         wrapText(text, earth.width / 2, earth.height / 4, maxWidth, lineHeight);
     });
 
-    document.addEventListener('click', handleMove);
-    document.addEventListener('touchmove', handleMove);
 
-    function handleMove(event) {
-        // event.preventDefault(); // Prevent default touch action (like scrolling)
-        const rect = earth.getBoundingClientRect();
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
-        const radius = 60; // Radius of the circular erasing area
+    const eventOptions = { passive: false };
 
-        for (let x = 0; x < rect.width; x++) {
-            for (let y = 0; y < rect.height; y++) {
-                const distance = Math.sqrt((x - mouseX) ** 2 + (y - mouseY) ** 2); // Distance from mouse coordinates
+    document.addEventListener('touchstart', handleMove, eventOptions);
+    document.addEventListener('touchmove', handleMove, eventOptions);
 
-                if (distance <= radius) {
-                    const pixel = ctx.getImageData(x, y, 1, 1); // Get pixel data at current coordinates
-                    if (pixel.data[3] !== 0) { // Check if the pixel is visible (not fully transparent)
-                        ctx.clearRect(x, y, 1, 1); // Erase the pixel
-                        erasedPixels++;
-                    }
-                }
-            }
-        }
+    let lastPlayTime = 0; // Track last time audio was played
+    let isDigging = false; // Track if erasing is happening
 
-        // Play random audio clip
-        const randomClipNumber = Math.floor(Math.random() * 5) + 1; // Generate random number between 1 and 5
-        const audio = new Audio(`../audio/dirt${randomClipNumber}.mp3`); // Construct path to random audio clip
-        if (!diggingsDone) {
+    function playDiggingSound() {
+        const now = Date.now();
+        // Play audio only if 1 second has passed since the last play
+        if (now - lastPlayTime >= 1000) {
+            lastPlayTime = now;
+            const randomClipNumber = Math.floor(Math.random() * 5) + 1;
+            const audio = new Audio(`../audio/dirt${randomClipNumber}.mp3`);
             audio.play();
         }
-        if (erasedPixels >= 0.75 * (rect.width * rect.height)) { // Check if at least 75% of pixels are erased
-            diggingsDone = true;
-            earth.style.opacity = '0';
+    }
 
-            document.getElementById('header-solution').style.opacity = "1";
-            document.getElementById('img-solution').style.opacity = "1";
-            document.getElementById('img-solution').style.filter = "brightness(1)";
-            document.getElementById('continue').style.display = "block";
-            // document.getElementById('image-solution').classList.add("solved");
-            // document.getElementById("continue").style.opacity = '1';
+    function countErasedPixels() {
+        const imageData = ctx.getImageData(0, 0, earth.width, earth.height);
+        const pixels = imageData.data;
+        let erased = 0;
+
+        for (let i = 3; i < pixels.length; i += 4) {
+            if (pixels[i] === 0) erased++; // Count fully transparent pixels
+        }
+
+        erasedPixels = erased;
+        if (erasedPixels >= 0.95 * totalPixels) {
+            triggerReveal();
         }
     }
+
+    function triggerReveal() {
+        document.body.style.backgroundColor = 'var(--green-dark)';
+        setTimeout(() => {
+            document.body.style.backgroundColor = '';
+            window.location.href = "unearthed.html";
+        }, 700);
+    }
+
+    function handleMove(event) {
+        event.preventDefault();
+        const touch = event.touches[0];
+        if (!touch) return;
+
+        const rect = earth.getBoundingClientRect();
+        const mouseX = touch.clientX - rect.left;
+        const mouseY = touch.clientY - rect.top;
+        const radius = Math.sqrt((window.innerWidth * window.innerHeight) / 150 / Math.PI);
+
+
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.beginPath();
+        ctx.arc(mouseX, mouseY, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalCompositeOperation = "source-over";
+
+        playDiggingSound(); // Play sound dynamically based on movement
+    }
+
+    // Check erased pixels every `checkInterval`
+    setInterval(countErasedPixels, checkInterval);
+
+    // Detect when touch ends
+    // earth.addEventListener("touchend", stopDigging);
+    // earth.addEventListener("touchcancel", stopDigging);
+
+
 </script>
 
 </html>

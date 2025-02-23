@@ -51,7 +51,7 @@
         function fadeInParagraphs(index) {
             if (index < paragraphs.length) {
                 paragraphs.eq(index).addClass('visible');
-                setTimeout(() => fadeInParagraphs(index + 1), 2000);
+                setTimeout(() => fadeInParagraphs(index + 1), 1000);
             }
         }
         fadeInParagraphs(0);

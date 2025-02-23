@@ -104,15 +104,15 @@
 
             paragraphs.forEach((paragraph, index) => {
                 setTimeout(function () {
-                    typeText(poemElement, paragraph.textContent, 25); // Adjust speed as needed
+                    typeText(poemElement, paragraph.textContent, 12); // Adjust speed as needed
                     poemElement.innerHTML += "<br>"; // Add line break after each paragraph
-                }, index * 2000); // Adjust delay between paragraphs as needed
+                }, index * 500); // Adjust delay between paragraphs as needed
 
                 if (index === paragraphs.length - 1) {
                     setTimeout(function () {
                         // Replace content of #poem with the original HTML structure
                         document.getElementById("continue").style.opacity = '1';
-                    }, index * 2000 + 1000); // Set delay after typing animation
+                    }, index * 500 + 1000); // Set delay after typing animation
 
                 }
             });

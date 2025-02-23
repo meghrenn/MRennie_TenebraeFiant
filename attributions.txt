@@ -5,31 +5,18 @@ click-tear: Breviceps https://freesound.org/s/445972/
 sweep: MattRuthSound https://freesound.org/s/561607/ 
 dirt 1-5: SpliceSound https://freesound.org/s/260130/ 
 static (in the Collapse page audio): dotY21 https://freesound.org/s/335205/
-
-roll-in, roll-out: davidkyoku https://freesound.org/s/156614/ NOT IN USE CURRENTLY
-
-
-interview (from the Collapse page audio): https://www.ulethbridge.ca/50-voices/content/bob 
-
+interview audio (from the Collapse page): https://www.ulethbridge.ca/50-voices/content/bob 
 
 TYPEFACES
 Abscissa: Tepid Monkey https://www.1001freefonts.com/abscissa.font
-
-
-Eldritch: Bolt Cutter Design https://www.1001freefonts.com/kremlin-orthodox-church.font
-
-
-Designer Name:	Christoph Mueller http://users.cuci.nl/nonsuch/free.htm
-https://www.1001freefonts.com/moms-typewriter.font
-
-
-FOGGRY
-Illustrations by Lauren Gulka (Instagram @lolo_doodles)
-Character by Xavier Brooks
 
 IMAGES
 Brown paper background image by andreas160578 on Pixabay https://pixabay.com/users/andreas160578-2383079/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1332019 
 On the Fragile webpage, document photographs are from Landscape Analysis & Development Guidelines, from the University of Lethbridge Archives (see Bibliography)
 On the West webpage, document scans are from Focus on the University, from the University of Lethbridge Library Digital Collections
-On the Controversy webpage, images from The Lethbridge Herald, accessed via the microfiche archive at the University of Lethbridge Library
+On the Controversy webpage, images featuring captions were sourced from The Lethbridge Herald, accessed via the microfiche archive at the University of Lethbridge Library
 All other photographs are from the University of Lethbridge Library Digital Collections
+
+FOGGRY
+Illustrations by Lauren Gulka (Instagram @lolo_doodles)
+Character by Xavier Brooks
