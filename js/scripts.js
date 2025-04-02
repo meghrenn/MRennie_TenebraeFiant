@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
   //Check passwords
   var pageNextStep = {
     "explanation": "initiation",
-    "initiation": "luck",
+    "initiation": "threat",
     "head": "origins",
     "tail": "origins",
     "fog": "architect",

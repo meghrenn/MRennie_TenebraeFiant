@@ -54,6 +54,15 @@
         text-align: center;
     }
 
+    #continue {
+        position: relative;
+        top: 80vh;
+        opacity: 0;
+        transition: opacity 2s ease;
+        z-index: 100;
+    }
+
+
     @media screen and (min-width: 500px) {
 
         #light,
@@ -69,7 +78,7 @@
     }
 </style>
 
-<body data-group-id="monster" data-page-id="logo">
+<body data-group-id="puzzling" data-page-id="logo">
     <main class="thick-padding containment">
         <!-- <p>
             "With recent discussions on motto and insignia in mind, a disillusioned professor suggested black and blue
@@ -78,6 +87,9 @@
         <img id="light" src="../images/logo/uleth-sun-black.png" alt="Light Image">
         <img id="dark" src="../images/logo/logo-convex4.png" alt="Dark Image">
         <p id="eldritch-speak"></p>
+        <a href="eldritch.html" class="center-container basic-padding marginal-margin">
+            <div id="continue" class="button basic-padding">RUN!</div>
+        </a>
         <div id="overlay"></div>
     </main>
 </body>
@@ -88,7 +100,7 @@
         document.getElementById("overlay").style.opacity = 1;
         document.getElementById("overlay").style.pointerEvents = 'auto';
     }
-    setTimeout(fadeImages, 25000);
+    setTimeout(fadeImages, 25000); //time until the logo changes to the monster graphic
 
     setTimeout(() => {
         const sentences = [
@@ -99,8 +111,8 @@
             'cave to the call',
             'bow to the beast',
             'uhall must fall',
-            'YEULETH must feast',
-            'TENEBRAE FIANT'
+            'Yeuleth must feast',
+            'Tenebrae Fiant'
         ];
 
         let sentenceIndex = 0;
@@ -149,7 +161,16 @@
 
         // Start typing with cycling sentences
         typeCyclingText(eldritchSpeakElement, sentences, 50); // Adjust the speed (milliseconds per letter)
-    }, 71000);
+    }, 30000); //time until text starts playing
+
+    setTimeout(function () {
+        // Replace content of #poem with the original HTML structure
+        document.getElementById("continue").style.opacity = '1';
+    }, 55000); // Set delay after typing animation
+
+
+
+
 
 </script>
 

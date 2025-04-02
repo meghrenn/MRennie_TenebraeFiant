@@ -23,49 +23,37 @@
 </style>
 
 <body data-group-id="beginning" data-page-id="threat">
-    <!-- <header id="main-header">
-        <ul>
-            <li id="about" class="basic-padding">About</li>
-            <li id="help" class="basic-padding">Trouble</li>
-            <li id="progress" class="basic-padding">Progress</li>
-        </ul>
-    </header> -->
     <main class="thick-padding containment right-container">
         <h1>Threat</h1>
-           <p class="tangent">
-            your visionary doesn't know the half of it. 
-            "help me save the university"
-            as if there's something worth saving.
-            i'm going to take down this institution. 
-            i'm going to destroy it because it deserves to be destroyed.
-            this is merely a warning for you. 
-            reminders of how you've earned your fate.
-            if you care enough to track me down
-            if you care enough to learn about who you are, what you belong to
-            then, sure, i'll let you speak your piece
-            but you have to find me first
-            blah blah blah blah blah
-
-            enough with this. 
-            let me return to your little narrator
-            see what you think of the signals i send
-
-
-
-            teaching about the past. giving you ideas about the evil of light
-
-
-
-            amidst the visions you have three things to find
-            learn the building's fragility
-            learn the west side's controversy
-            learn that light's not epitome
-
-
-            you may face my face, but 
-
-
+        <p class="tangent">
+            You have no clue what you're getting yourself into.
         </p>
+        <p class="tangent">
+            "Help me save the university," your little friend pleads,
+            as though there's something worth saving.
+        </p>
+        <p class="tangent">
+            I am going to take this institution down.
+            I am going to destroy it because it deserves to be destoryed.
+            I am going to collapse UHall into the Oldman River.
+        </p>
+        <p class="tangent">
+            You cannot stop me.
+        </p>
+        <p class="tangent">
+           You can, however, learn why it has come to this:
+        </p>
+        <ul>
+            <li class="tangent">Discover the building's fragility,</li>
+            <li class="tangent"> the west side's controversy,</li>
+            <li class="tangent"> and the light's enmity, </li>
+        </ul>
+
+        <p class="tangent">
+            and I'll grant you my presence. Otherwise, sit back and wait for your world to
+            implode.
+        </p>
+
         <div class="center-container basic-padding marginal-margin">
             <div id="continue" class="button basic-padding">Continue</div>
         </div>
@@ -77,11 +65,9 @@
     document.addEventListener('DOMContentLoaded', function () {
         document.getElementById("continue").addEventListener("click", function () {
             document.body.style.backgroundColor = 'var(--green-dark)';
-            document.getElementById("main-header").style.backgroundColor = 'var(--green-medium)';
             setTimeout(function () {
                 document.body.style.backgroundColor = '';
-                document.getElementById("main-header").style.backgroundColor = '';
-                window.location.href = "../beginning/initiation.html";
+                window.location.href = "luck.html";
             }, 700);
         });
     });

@@ -138,61 +138,61 @@
 
 
 
-    setTimeout(() => {
-        // Array of sentences to cycle through
-        const sentences = [
-            'UHALL MUST FALL',
-            'TENEBRAE FIANT',
-        ];
+    // setTimeout(() => {
+    //     // Array of sentences to cycle through
+    //     const sentences = [
+    //         'UHALL MUST FALL',
+    //         'TENEBRAE FIANT',
+    //     ];
 
-        let sentenceIndex = 0;
-        // Function to simulate typing effect with cycling sentences
-        function typeCyclingText(element, sentences, speed) {
-            let charIndex = 0;
+    //     let sentenceIndex = 0;
+    //     // Function to simulate typing effect with cycling sentences
+    //     function typeCyclingText(element, sentences, speed) {
+    //         let charIndex = 0;
 
-            function typeCharacter() {
-                element.textContent = sentences[sentenceIndex].substring(0, charIndex);
-                charIndex++;
-
-
-                // Check if all letters in the current sentence are typed
-                if (charIndex > sentences[sentenceIndex].length) {
-                    charIndex = 0;
-                    sentenceIndex = (sentenceIndex + 1) % sentences.length;
+    //         function typeCharacter() {
+    //             element.textContent = sentences[sentenceIndex].substring(0, charIndex);
+    //             charIndex++;
 
 
-                    // Introduce a delay before typing the next sentence
-                    setTimeout(function () {
-                        deleteText(element);
-                    }, 3000); // 2000 milliseconds (2 seconds) delay
-                } else {
-                    // Continue typing the current sentence
-                    setTimeout(typeCharacter, speed);
-                }
-
-            }
-
-            // Start typing with cycling sentences
-            typeCharacter();
-
-        }
-
-        // Function to delete existing text
-        function deleteText(element) {
-            // Clear the existing text instantly
-            element.textContent = '';
+    //             // Check if all letters in the current sentence are typed
+    //             if (charIndex > sentences[sentenceIndex].length) {
+    //                 charIndex = 0;
+    //                 sentenceIndex = (sentenceIndex + 1) % sentences.length;
 
 
-            // Start typing the next sentence
-            typeCyclingText(element, sentences, 50); // Adjust the speed (milliseconds per letter)
-        }
+    //                 // Introduce a delay before typing the next sentence
+    //                 setTimeout(function () {
+    //                     deleteText(element);
+    //                 }, 3000); // 2000 milliseconds (2 seconds) delay
+    //             } else {
+    //                 // Continue typing the current sentence
+    //                 setTimeout(typeCharacter, speed);
+    //             }
 
-        // Get the element and start typing with cycling sentences
-        const eldritchSpeakElement = document.getElementById('eldritch-speak');
+    //         }
 
-        // Start typing with cycling sentences
-        typeCyclingText(eldritchSpeakElement, sentences, 50); // Adjust the speed (milliseconds per letter)
-    }, 3000);
+    //         // Start typing with cycling sentences
+    //         typeCharacter();
+
+    //     }
+
+    //     // Function to delete existing text
+    //     function deleteText(element) {
+    //         // Clear the existing text instantly
+    //         element.textContent = '';
+
+
+    //         // Start typing the next sentence
+    //         typeCyclingText(element, sentences, 50); // Adjust the speed (milliseconds per letter)
+    //     }
+
+    //     // Get the element and start typing with cycling sentences
+    //     const eldritchSpeakElement = document.getElementById('eldritch-speak');
+
+    //     // Start typing with cycling sentences
+    //     typeCyclingText(eldritchSpeakElement, sentences, 50); // Adjust the speed (milliseconds per letter)
+    // }, 3000);
 
 </script>
 

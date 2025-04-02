@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="../js/scripts.js"></script>
-    <script src="../js/continue.js"></script>
 </head>
 <style>
     * {
@@ -53,7 +52,7 @@
     }
 </style>
 
-<body data-group-id="monster" data-page-id="like-light">
+<body data-group-id="tunnel" data-page-id="like-light">
     <main class="thick-padding containment">
         <div id="poem" class="right-container">
             <p>Don’t fall prey to the propaganda. </p>
@@ -117,5 +116,13 @@
                 }
             });
         });
+
+        document.getElementById("continue").addEventListener("click", function () {
+        document.body.style.backgroundColor = 'var(--green-dark)';
+        setTimeout(function () {
+            document.body.style.backgroundColor = '';
+            window.location.href = "enmity.html";
+        }, 700);
+    });
     </script>
 </body>

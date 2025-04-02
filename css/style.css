@@ -391,6 +391,11 @@ a.egg {
     z-index: 6;
 }
 
+
+#found {
+     background-color: var(--lightest);
+    }
+
 /* {
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
