@@ -347,6 +347,7 @@ h2 {
 } */
 
 p,
+i,
 text>* {
     display: block;
     margin-bottom: 1em;
