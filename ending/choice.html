@@ -13,11 +13,11 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMB7ZWWEKQ"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', 'G-PMB7ZWWEKQ');
+    gtag('config', 'G-PMB7ZWWEKQ');
 </script>
 
 <body data-group-id="ending" data-page-id="encroaching-end">
@@ -94,6 +94,16 @@
             }, 500);
         }
     })
+
+    document.getElementById("end-form").addEventListener("submit", function (event) {
+        let selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
+        gtag("event", "survey_submission", {
+            event_category: "Survey",
+            event_label: selectedAnswer,
+            value: 1
+        });
+        alert("Response recorded! Thank you.");
+    });
 
 </script>
 
