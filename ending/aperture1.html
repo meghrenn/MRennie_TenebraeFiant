@@ -10,6 +10,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/scripts.js"></script>
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PMB7ZWWEKQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PMB7ZWWEKQ');
+</script>
+
 <style>
     body {
         background-color: black;
@@ -74,25 +84,18 @@
     <main class="right-container thick-padding">
         <div class="centered-content">
             <p class="eldritch-speak thick-padding">The dark. The dark loves you like no other. Like a parent leaning
-                over the edge
-                of the crib at night,
-                watching even as the newborn sleeps and does not need them. </p>
+                over the edge of the crib at night, watching even as the newborn sleeps and does not need them. </p>
             <p class="eldritch-speak thick-padding">I love you.</p>
             <p class="eldritch-speak thick-padding"> Think of the shadows in the troughs between coulees. The clear
-                night sky visible
-                on the west side before anything else was built here.
+                night sky visible on the west side before anything else was built here.
                 Just the dark and the grasses. Just feeling our way by sound, by touch.</p>
             <p class="eldritch-speak thick-padding">Think of muddled waters, of uncertain times. The darkness of
-                nebulosity and not
-                knowing. The
-                black blade of controversy
+                nebulosity and not knowing. The black blade of controversy
                 slashing apart reputations. The shadow that the boulder casts over Sisyphus as he toils.</p>
-            <p class="eldritch-speak thick-padding">
-                I antagonise you because I love you. I fight you because I love you. I want you to be strong.
-            </p>
+            <p class="eldritch-speak thick-padding"> I antagonise you because I love you. I fight you because I love
+                you. I want you to be strong. </p>
             <p class="eldritch-speak thick-padding" id="continue"> You've made it through to here. After all you've
-                learned, there's
-                one question I have to ask:</p>
+                learned, there's one question I have to ask:</p>
         </div>
     </main>
 </body>
@@ -113,7 +116,7 @@
 
         // Initial fade-in of monster and first paragraph
         $("#monster").fadeIn(1000, function () {
-            $(paragraphs[currentIndex]).fadeIn(5000);
+            $(paragraphs[currentIndex]).fadeIn(500);
         });
 
         // Handle click on the right side
