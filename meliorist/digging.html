@@ -148,7 +148,7 @@
             ctx.stroke();
         }
 
-        // 5) Cover the brown rectangle with scattered lines resembling pine needles
+        // 3) Cover the brown rectangle with scattered lines resembling pine needles
         ctx.strokeStyle = hexToRGBA('#4C405C', 0.8);
         ctx.fillStyle = hexToRGBA('#4C405C', 0.8);
         ctx.lineWidth = 3; // Set line width
@@ -178,7 +178,7 @@
             ctx.fill(); // Fill the shape
             ctx.stroke(); // Stroke the shape
         }
-        //6. TEXT
+        //4. TEXT
         ctx.fillStyle = "#ffffff";
         wrapText(text, earth.width / 2, earth.height / 4, maxWidth, lineHeight);
     });
@@ -213,7 +213,7 @@
         }
 
         erasedPixels = erased;
-        if (erasedPixels >= 0.95 * totalPixels) {
+        if (erasedPixels >= 0.70 * totalPixels) {
             triggerReveal();
         }
     }
